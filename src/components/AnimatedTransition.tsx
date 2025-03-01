@@ -3,7 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface AnimatedTransitionProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   show: boolean;
   duration?: number;
   animation?: 'fade' | 'scale' | 'slide-up' | 'slide-down';
