@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { UserProfile } from '@/lib/types';
@@ -36,13 +35,19 @@ const sampleProfile: UserProfile = {
   ]
 };
 
-interface ProjectWithStage extends UserProfile['projects'][0] {
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  status: 'active' | 'completed';
+}
+
+interface ProjectWithStage extends Project {
   stage?: 'planning' | 'inProgress' | 'review' | 'completed';
   reviewCount?: number;
   reviewScore?: number;
 }
 
-// Enhanced sample data with stages
 const enhancedProjects: ProjectWithStage[] = [
   { 
     id: '1', 
@@ -161,7 +166,6 @@ const ProjectRoadmap: React.FC = () => {
   
   return (
     <div className="w-full space-y-8">
-      {/* User info card */}
       <Card className="w-full">
         <CardHeader className="flex flex-row items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
@@ -193,7 +197,6 @@ const ProjectRoadmap: React.FC = () => {
         </CardHeader>
       </Card>
       
-      {/* Project stages */}
       <div className="grid grid-cols-4 gap-4">
         {(['planning', 'inProgress', 'review', 'completed'] as ProjectWithStage['stage'][]).map(stage => (
           <div key={stage} className="space-y-4">

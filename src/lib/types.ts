@@ -11,6 +11,13 @@ export interface NeuralNodeData {
   color?: string;
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  status: 'active' | 'completed';
+}
+
 export interface UserProfile {
   name: string;
   email: string;
@@ -20,12 +27,7 @@ export interface UserProfile {
     title: string;
     url: string;
   }[];
-  projects?: {
-    id: string;
-    title: string;
-    description: string;
-    status: 'active' | 'completed';
-  }[];
+  projects?: Project[];
 }
 
 export interface ImportSource {
