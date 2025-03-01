@@ -8,6 +8,7 @@ interface AnimatedTransitionProps {
   duration?: number;
   animation?: 'fade' | 'scale' | 'slide-up' | 'slide-down';
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const AnimatedTransition: React.FC<AnimatedTransitionProps> = ({
@@ -16,6 +17,7 @@ export const AnimatedTransition: React.FC<AnimatedTransitionProps> = ({
   duration = 300,
   animation = 'fade',
   className,
+  style,
 }) => {
   const [render, setRender] = React.useState(show);
 
@@ -49,7 +51,10 @@ export const AnimatedTransition: React.FC<AnimatedTransitionProps> = ({
         animationClasses[animation],
         className,
       )}
-      style={{ animationDuration: `${duration}ms` }}
+      style={{
+        animationDuration: `${duration}ms`,
+        ...style
+      }}
     >
       {children}
     </div>
