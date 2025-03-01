@@ -1,12 +1,80 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import Import from "./pages/Import";
+import SearchPage from "./pages/SearchPage";
+import Navbar from "./components/Navbar";
 
 const queryClient = new QueryClient();
+
+// Page transition wrapper
+const PageTransition = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  
+  return (
+    <div className="transition-opacity duration-300 animate-fade-in">
+      {children}
+    </div>
+  );
+};
+
+const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route 
+        path="/" 
+        element={
+          <PageTransition>
+            <Index />
+          </PageTransition>
+        } 
+      />
+      <Route 
+        path="/profile" 
+        element={
+          <PageTransition>
+            <Profile />
+          </PageTransition>
+        } 
+      />
+      <Route 
+        path="/import" 
+        element={
+          <PageTransition>
+            <Import />
+          </PageTransition>
+        } 
+      />
+      <Route 
+        path="/search" 
+        element={
+          <PageTransition>
+            <SearchPage />
+          </PageTransition>
+        } 
+      />
+      <Route 
+        path="*" 
+        element={
+          <PageTransition>
+            <NotFound />
+          </PageTransition>
+        } 
+      />
+    </Routes>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -14,11 +82,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="min-h-screen">
+          <Navbar />
+          <AppRoutes />
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
