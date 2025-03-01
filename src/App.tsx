@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import Import from "./pages/Import";
 import SearchPage from "./pages/SearchPage";
+import Settings from "./pages/Settings";
 import Navbar from "./components/Navbar";
 
 const queryClient = new QueryClient();
@@ -61,6 +62,14 @@ const AppRoutes = () => {
         element={
           <PageTransition>
             <SearchPage />
+          </PageTransition>
+        } 
+      />
+      <Route 
+        path="/settings" 
+        element={
+          <PageTransition>
+            <Settings />
           </PageTransition>
         } 
       />
