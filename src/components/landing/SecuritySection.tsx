@@ -1,53 +1,40 @@
-
 import { ShieldCheck, Lock, KeyRound, Eye, Sparkles } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-
 interface SecuritySectionProps {
   show: boolean;
 }
-
-export const SecuritySection = ({ show }: SecuritySectionProps) => {
-  const securityFeatures = [
-    {
-      icon: <Lock size={24} />,
-      title: "End-to-End Encryption",
-      description: "Your data is encrypted at rest and in transit, ensuring that only you can access your knowledge."
-    },
-    {
-      icon: <KeyRound size={24} />,
-      title: "Two-Factor Authentication",
-      description: "Add an extra layer of security to your account with our robust two-factor authentication system."
-    },
-    {
-      icon: <Eye size={24} />,
-      title: "Privacy Controls",
-      description: "Fine-grained privacy settings that give you complete control over what you share and who you share it with."
-    }
-  ];
-  
-  const securityFAQs = [
-    {
-      question: "How is my data encrypted?",
-      answer: "We use industry-standard AES-256 encryption for all data at rest, and TLS 1.3 for all data in transit. Your encryption keys are derived from your password using PBKDF2 with a high iteration count, ensuring that only you can decrypt your data."
-    },
-    {
-      question: "Where is my data stored?",
-      answer: "Your data is stored in secure, SOC 2 compliant data centers. We use a distributed architecture with redundancy across multiple geographic regions to ensure high availability and disaster recovery capabilities."
-    },
-    {
-      question: "Can the Cortex team access my notes?",
-      answer: "No. We employ a zero-knowledge architecture, which means that your data is encrypted before it leaves your device. The encryption keys are derived from your password, which we never store. This means that even Cortex employees cannot access your unencrypted data."
-    },
-    {
-      question: "How do you handle data deletion?",
-      answer: "When you delete data in Cortex, it is immediately marked for deletion and removed from your view. The data is then permanently purged from our systems within 30 days. You can also request a complete account deletion, which will remove all your data from our systems."
-    }
-  ];
-
-  return (
-    <AnimatedTransition show={show} animation="slide-up" duration={600}>
+export const SecuritySection = ({
+  show
+}: SecuritySectionProps) => {
+  const securityFeatures = [{
+    icon: <Lock size={24} />,
+    title: "End-to-End Encryption",
+    description: "Your data is encrypted at rest and in transit, ensuring that only you can access your knowledge."
+  }, {
+    icon: <KeyRound size={24} />,
+    title: "Two-Factor Authentication",
+    description: "Add an extra layer of security to your account with our robust two-factor authentication system."
+  }, {
+    icon: <Eye size={24} />,
+    title: "Privacy Controls",
+    description: "Fine-grained privacy settings that give you complete control over what you share and who you share it with."
+  }];
+  const securityFAQs = [{
+    question: "How is my data encrypted?",
+    answer: "We use industry-standard AES-256 encryption for all data at rest, and TLS 1.3 for all data in transit. Your encryption keys are derived from your password using PBKDF2 with a high iteration count, ensuring that only you can decrypt your data."
+  }, {
+    question: "Where is my data stored?",
+    answer: "Your data is stored in secure, SOC 2 compliant data centers. We use a distributed architecture with redundancy across multiple geographic regions to ensure high availability and disaster recovery capabilities."
+  }, {
+    question: "Can the Cortex team access my notes?",
+    answer: "No. We employ a zero-knowledge architecture, which means that your data is encrypted before it leaves your device. The encryption keys are derived from your password, which we never store. This means that even Cortex employees cannot access your unencrypted data."
+  }, {
+    question: "How do you handle data deletion?",
+    answer: "When you delete data in Cortex, it is immediately marked for deletion and removed from your view. The data is then permanently purged from our systems within 30 days. You can also request a complete account deletion, which will remove all your data from our systems."
+  }];
+  return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="mt-24 mb-16">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-1.5 bg-muted rounded-xl mb-4">
@@ -63,8 +50,7 @@ export const SecuritySection = ({ show }: SecuritySectionProps) => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {securityFeatures.map((feature, idx) => (
-            <div key={idx} className="glass-panel rounded-xl p-6 md:p-8 relative overflow-hidden group">
+          {securityFeatures.map((feature, idx) => <div key={idx} className="glass-panel rounded-xl p-6 md:p-8 relative overflow-hidden group">
               <div className="absolute -right-12 -bottom-12 w-40 h-40 bg-primary rounded-full opacity-5 group-hover:opacity-10 transition-opacity duration-500"></div>
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mb-6 shadow-md text-primary">
@@ -73,8 +59,7 @@ export const SecuritySection = ({ show }: SecuritySectionProps) => {
                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-12">
@@ -139,47 +124,24 @@ export const SecuritySection = ({ show }: SecuritySectionProps) => {
               </div>
             </div>
             
-            <Button className="mt-8">
-              Learn More About Security
-            </Button>
+            
           </div>
           
           <div className="glass-panel rounded-xl p-6 md:p-8">
             <h3 className="text-xl font-bold mb-6">Security FAQ</h3>
             
             <Accordion type="single" collapsible className="w-full">
-              {securityFAQs.map((faq, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`}>
+              {securityFAQs.map((faq, idx) => <AccordionItem key={idx} value={`item-${idx}`}>
                   <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
                     {faq.answer}
                   </AccordionContent>
-                </AccordionItem>
-              ))}
+                </AccordionItem>)}
             </Accordion>
           </div>
         </div>
         
-        <div className="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-xl p-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-              <ShieldCheck size={32} />
-            </div>
-          </div>
-          <h3 className="text-2xl font-bold mb-3">We're committed to your privacy</h3>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-            Your data is yours. We don't sell it, we don't mine it for advertising, and we don't share it with third parties.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button variant="outline">
-              Read Our Privacy Policy
-            </Button>
-            <Button variant="outline">
-              Security Whitepaper
-            </Button>
-          </div>
-        </div>
+        
       </div>
-    </AnimatedTransition>
-  );
+    </AnimatedTransition>;
 };
