@@ -41,6 +41,36 @@ export const IntegrationShowcase = ({ show }: IntegrationShowcaseProps) => {
       logo: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2V9h-2V7h4v10z",
       color: "bg-gradient-to-br from-gray-600 to-gray-400 dark:from-gray-500 dark:to-gray-700",
       description: "Transform your Roam database into an interactive neural network.",
+    },
+    {
+      name: "ChatGPT",
+      logo: "M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z",
+      color: "bg-gradient-to-br from-teal-600 to-teal-400 dark:from-teal-500 dark:to-teal-700",
+      description: "Integrate your ChatGPT conversations and save important insights directly to your graph.",
+    },
+    {
+      name: "Perplexity",
+      logo: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0 0V12m0 0V2m0 10h10m-10 0H2",
+      color: "bg-gradient-to-br from-indigo-600 to-indigo-400 dark:from-indigo-500 dark:to-indigo-700",
+      description: "Save search results and AI-powered insights from Perplexity into your knowledge base.",
+    },
+    {
+      name: "Claude",
+      logo: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
+      color: "bg-gradient-to-br from-orange-600 to-orange-400 dark:from-orange-500 dark:to-orange-700",
+      description: "Turn your Claude AI conversations into structured knowledge nodes with semantic linking.",
+    },
+    {
+      name: "Groq",
+      logo: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
+      color: "bg-gradient-to-br from-rose-600 to-rose-400 dark:from-rose-500 dark:to-rose-700",
+      description: "Import high-performance AI responses from Groq and organize them in your second brain.",
+    },
+    {
+      name: "Apple Notes",
+      logo: "M14 3v4a1 1 0 001 1h4M5 8h10M5 12h10M8 16h7M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z",
+      color: "bg-gradient-to-br from-yellow-600 to-yellow-400 dark:from-yellow-500 dark:to-yellow-700",
+      description: "Sync your Apple Notes across devices and integrate them seamlessly with your knowledge graph.",
     }
   ];
 
@@ -69,20 +99,20 @@ export const IntegrationShowcase = ({ show }: IntegrationShowcaseProps) => {
         </div>
 
         <div className="flex flex-col space-y-8">
-          {/* Horizontal Integration Display */}
-          <div className="flex flex-wrap justify-center gap-6">
+          {/* Horizontal Integration Display - Improved to show all logos better */}
+          <div className="flex overflow-x-auto pb-4 justify-center gap-4 md:gap-6 px-2">
             {integrations.map((integration, index) => (
               <div 
                 key={integration.name}
-                className={`transition-all duration-300 ${
+                className={`transition-all duration-300 flex-shrink-0 ${
                   index === activeIndex ? "scale-110 shadow-lg" : "scale-100 opacity-80"
                 }`}
                 onClick={() => setActiveIndex(index)}
               >
-                <div className={`w-24 h-24 sm:w-28 sm:h-28 rounded-2xl ${integration.color} shadow-md flex items-center justify-center cursor-pointer hover:shadow-xl transition-all duration-300`}>
+                <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-2xl ${integration.color} shadow-md flex items-center justify-center cursor-pointer hover:shadow-xl transition-all duration-300`}>
                   <svg
                     viewBox="0 0 24 24"
-                    className="w-12 h-12 sm:w-14 sm:h-14 text-white"
+                    className="w-10 h-10 sm:w-12 sm:h-12 text-white"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.5"
@@ -92,7 +122,7 @@ export const IntegrationShowcase = ({ show }: IntegrationShowcaseProps) => {
                     <path d={integration.logo} />
                   </svg>
                 </div>
-                <p className="text-center mt-2 font-medium text-sm">{integration.name}</p>
+                <p className="text-center mt-2 font-medium text-sm truncate w-24">{integration.name}</p>
               </div>
             ))}
           </div>
@@ -122,7 +152,7 @@ export const IntegrationShowcase = ({ show }: IntegrationShowcaseProps) => {
                   <path d={integrations[activeIndex].logo} />
                 </svg>
               </div>
-              <div className="neural-connection h-1 w-24"></div>
+              <div className="neural-connection h-1 w-24 bg-primary/20"></div>
               <div className="neural-node w-12 h-12 flex items-center justify-center relative">
                 <div className="absolute inset-0 rounded-full bg-primary/10 animate-ping"></div>
                 <span className="text-primary text-lg font-bold">C</span>
