@@ -68,42 +68,37 @@ export const IntegrationShowcase = ({ show }: IntegrationShowcaseProps) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="flex justify-center">
-            <div className="relative w-[320px] h-[320px]">
-              {integrations.map((integration, index) => (
-                <div
-                  key={integration.name}
-                  className={`absolute inset-0 transition-all duration-500 flex items-center justify-center ${
-                    index === activeIndex 
-                      ? "opacity-100 scale-100 z-10" 
-                      : "opacity-0 scale-95 z-0"
-                  }`}
-                >
-                  <div className={`w-24 h-24 rounded-2xl ${integration.color} shadow-lg flex items-center justify-center`}>
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-12 h-12 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d={integration.logo} />
-                    </svg>
-                  </div>
-                  <div className="neural-connection h-1 w-32 absolute left-full ml-4"></div>
-                  <div className="neural-node w-8 h-8 absolute left-full ml-36"></div>
+        <div className="flex flex-col space-y-8">
+          {/* Horizontal Integration Display */}
+          <div className="flex flex-wrap justify-center gap-6">
+            {integrations.map((integration, index) => (
+              <div 
+                key={integration.name}
+                className={`transition-all duration-300 ${
+                  index === activeIndex ? "scale-110 shadow-lg" : "scale-100 opacity-80"
+                }`}
+                onClick={() => setActiveIndex(index)}
+              >
+                <div className={`w-24 h-24 sm:w-28 sm:h-28 rounded-2xl ${integration.color} shadow-md flex items-center justify-center cursor-pointer hover:shadow-xl transition-all duration-300`}>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-12 h-12 sm:w-14 sm:h-14 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d={integration.logo} />
+                  </svg>
                 </div>
-              ))}
-              <div className="neural-node w-16 h-16 absolute left-full ml-48 animate-pulse-slow">
-                <div className="absolute inset-0 rounded-full bg-primary/10 animate-ping"></div>
+                <p className="text-center mt-2 font-medium text-sm">{integration.name}</p>
               </div>
-            </div>
+            ))}
           </div>
           
-          <div className="glass-panel p-6 rounded-xl">
+          {/* Integration Details */}
+          <div className="glass-panel p-6 rounded-xl max-w-2xl mx-auto w-full">
             <div className="mb-4">
               <h3 className="text-xl font-bold text-primary">
                 {integrations[activeIndex].name}
@@ -113,36 +108,28 @@ export const IntegrationShowcase = ({ show }: IntegrationShowcaseProps) => {
               </p>
             </div>
             
-            <div className="mt-8 space-y-4">
-              {integrations.map((integration, index) => (
-                <div 
-                  key={integration.name}
-                  onClick={() => setActiveIndex(index)}
-                  className={`flex items-center p-2 rounded-lg cursor-pointer transition-colors duration-200 ${
-                    index === activeIndex 
-                      ? "bg-primary/10 text-primary" 
-                      : "hover:bg-muted"
-                  }`}
+            <div className="flex items-center justify-center mt-6 gap-4">
+              <div className="neural-node w-12 h-12 flex items-center justify-center">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-6 h-6 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <div className={`w-8 h-8 rounded-lg ${integration.color} flex items-center justify-center mr-3 shadow`}>
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d={integration.logo} />
-                    </svg>
-                  </div>
-                  <span className="font-medium">{integration.name}</span>
-                </div>
-              ))}
+                  <path d={integrations[activeIndex].logo} />
+                </svg>
+              </div>
+              <div className="neural-connection h-1 w-24"></div>
+              <div className="neural-node w-12 h-12 flex items-center justify-center relative">
+                <div className="absolute inset-0 rounded-full bg-primary/10 animate-ping"></div>
+                <span className="text-primary text-lg font-bold">C</span>
+              </div>
             </div>
             
-            <Button className="w-full mt-6" variant="outline">
+            <Button className="w-full mt-8" variant="outline">
               Explore All Integrations <ArrowRight className="ml-2" size={16} />
             </Button>
           </div>
