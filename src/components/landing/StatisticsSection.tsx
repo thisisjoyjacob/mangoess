@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { Activity, Sparkles } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
@@ -24,10 +23,10 @@ export const StatisticsSection = ({ show }: StatisticsSectionProps) => {
   ]);
   
   const targetStats: Stat[] = [
-    { value: 50000, label: "Active Users", suffix: "+", color: "from-blue-500 to-indigo-600" },
-    { value: 230, label: "Notes Created", suffix: "K", color: "from-amber-500 to-orange-600" },
-    { value: 4.8, label: "Connections", suffix: "M", color: "from-emerald-500 to-green-600" },
-    { value: 720, label: "Ideas Captured", prefix: "~", suffix: "K", color: "from-purple-500 to-pink-600" }
+    { value: 250000, label: "Active Users", suffix: "+", color: "from-blue-500 to-indigo-600" },
+    { value: 780, label: "Notes Created", suffix: "K", color: "from-amber-500 to-orange-600" },
+    { value: 12.5, label: "Connections", suffix: "M", color: "from-green-500 to-emerald-600" },
+    { value: 2300, label: "Ideas Captured", prefix: "~", suffix: "K", color: "from-purple-500 to-pink-600" }
   ];
   
   const animationTriggered = useRef(false);
