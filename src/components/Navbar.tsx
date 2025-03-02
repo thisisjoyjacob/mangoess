@@ -1,9 +1,12 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Brain, Search, Upload, User, Settings } from 'lucide-react';
+import { Brain, LogIn, Search, Upload, User, Settings, LogOut } from 'lucide-react';
 import { useRippleEffect } from '@/lib/animations';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
+import AuthModal from '@/components/AuthModal';
+import { Button } from '@/components/ui/button';
 
 interface NavItemProps {
   to: string;
@@ -46,30 +49,74 @@ const NavItem = ({ to, icon, label, active, onClick }: NavItemProps) => {
 
 export const Navbar = () => {
   const [active, setActive] = useState('home');
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
   
-  const navItems = [
+  const handleOpenAuthModal = () => {
+    setIsAuthModalOpen(true);
+  };
+
+  const handleCloseAuthModal = () => {
+    setIsAuthModalOpen(false);
+  };
+
+  // Basic navigation items - only Brain is accessible when not authenticated
+  const baseNavItems = [
     { to: '/', icon: <Brain size={20} />, label: 'Brain', id: 'home' },
+  ];
+  
+  // Navigation items available after authentication
+  const authNavItems = [
     { to: '/search', icon: <Search size={20} />, label: 'Search', id: 'search' },
     { to: '/import', icon: <Upload size={20} />, label: 'Import', id: 'import' },
     { to: '/profile', icon: <User size={20} />, label: 'Profile', id: 'profile' },
     { to: '/settings', icon: <Settings size={20} />, label: 'Settings', id: 'settings' },
   ];
 
+  // Determine which items to show based on auth state
+  const navItems = isAuthenticated 
+    ? [...baseNavItems, ...authNavItems]
+    : baseNavItems;
+
   return (
-    <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-full px-1 py-1">
-      <nav className="flex items-center">
-        {navItems.map((item) => (
-          <NavItem
-            key={item.id}
-            to={item.to}
-            icon={item.icon}
-            label={item.label}
-            active={active === item.id}
-            onClick={() => setActive(item.id)}
-          />
-        ))}
-      </nav>
-    </header>
+    <>
+      <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-full px-1 py-1">
+        <nav className="flex items-center">
+          {navItems.map((item) => (
+            <NavItem
+              key={item.id}
+              to={item.to}
+              icon={item.icon}
+              label={item.label}
+              active={active === item.id}
+              onClick={() => setActive(item.id)}
+            />
+          ))}
+          
+          {isAuthenticated ? (
+            <Button
+              variant="ghost"
+              className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary/10"
+              onClick={logout}
+            >
+              <LogOut size={20} />
+              <span className="font-medium">Logout</span>
+            </Button>
+          ) : (
+            <Button
+              variant="ghost"
+              className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary/10"
+              onClick={handleOpenAuthModal}
+            >
+              <LogIn size={20} />
+              <span className="font-medium">Login</span>
+            </Button>
+          )}
+        </nav>
+      </header>
+      
+      <AuthModal isOpen={isAuthModalOpen} onClose={handleCloseAuthModal} />
+    </>
   );
 };
 
