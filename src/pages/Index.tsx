@@ -5,6 +5,7 @@ import { HeroSection } from '@/components/landing/HeroSection';
 import { FeatureSection } from '@/components/landing/FeatureSection';
 import { PricingSection } from '@/components/landing/PricingSection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
+import { FAQSection } from '@/components/landing/FAQSection';
 import { CallToAction } from '@/components/landing/CallToAction';
 import { LoadingScreen } from '@/components/landing/LoadingScreen';
 
@@ -54,6 +55,9 @@ const Index = () => {
           
           {/* Testimonials Section */}
           <TestimonialsSection showTestimonials={showTestimonials} />
+          
+          {/* FAQ Section */}
+          <FAQSection />
           
           {/* Call to Action */}
           <CallToAction />
