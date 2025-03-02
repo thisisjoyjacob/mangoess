@@ -60,12 +60,14 @@ export const IntegrationShowcase = ({
     color: "bg-gradient-to-br from-yellow-600 to-yellow-400 dark:from-yellow-500 dark:to-yellow-700",
     description: "Sync your Apple Notes across devices and integrate them seamlessly with your knowledge graph."
   }];
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex(current => (current + 1) % integrations.length);
     }, 3000);
     return () => clearInterval(interval);
   }, [integrations.length]);
+  
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="mt-24 mb-16">
         <div className="text-center mb-12">
@@ -82,16 +84,22 @@ export const IntegrationShowcase = ({
         </div>
 
         <div className="flex flex-col space-y-8">
-          {/* Horizontal Integration Display - Improved to show all logos better */}
-          <div className="flex overflow-x-auto pb-4 justify-center gap-4 md:gap-6 py-[26px] px-[9px] mx-0 my-[11px]">
-            {integrations.map((integration, index) => <div key={integration.name} className={`transition-all duration-300 flex-shrink-0 ${index === activeIndex ? "scale-110 shadow-lg" : "scale-100 opacity-80"}`} onClick={() => setActiveIndex(index)}>
+          {/* Two-row Integration Display */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 justify-items-center px-4 py-4">
+            {integrations.map((integration, index) => (
+              <div 
+                key={integration.name} 
+                className={`transition-all duration-300 flex flex-col items-center ${index === activeIndex ? "scale-110 shadow-lg" : "scale-100 opacity-80"}`} 
+                onClick={() => setActiveIndex(index)}
+              >
                 <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-2xl ${integration.color} shadow-md flex items-center justify-center cursor-pointer hover:shadow-xl transition-all duration-300`}>
                   <svg viewBox="0 0 24 24" className="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d={integration.logo} />
                   </svg>
                 </div>
                 <p className="text-center mt-2 font-medium text-sm truncate w-24">{integration.name}</p>
-              </div>)}
+              </div>
+            ))}
           </div>
           
           {/* Integration Details */}
