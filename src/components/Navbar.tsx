@@ -93,7 +93,7 @@ export const Navbar = () => {
           {isAuthenticated ? (
             <Button
               variant="ghost"
-              className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary/10"
+              className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground"
               onClick={logout}
             >
               <LogOut size={20} />
@@ -102,7 +102,7 @@ export const Navbar = () => {
           ) : (
             <Button
               variant="ghost"
-              className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary/10"
+              className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground"
               onClick={handleOpenAuthModal}
             >
               <LogIn size={20} />
