@@ -1,12 +1,14 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Brain, LogIn, Search, Upload, User, Settings, LogOut } from 'lucide-react';
+import { Brain, LogIn, Search, Upload, User, Settings, LogOut, Moon, Sun } from 'lucide-react';
 import { useRippleEffect } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import AuthModal from '@/components/AuthModal';
 import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface NavItemProps {
   to: string;
@@ -51,6 +53,7 @@ export const Navbar = () => {
   const [active, setActive] = useState('home');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { isAuthenticated, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   
   const handleOpenAuthModal = () => {
     setIsAuthModalOpen(true);
@@ -89,6 +92,22 @@ export const Navbar = () => {
               onClick={() => setActive(item.id)}
             />
           ))}
+          
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full ml-1"
+                onClick={toggleTheme}
+              >
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Toggle {theme === 'dark' ? 'light' : 'dark'} mode</p>
+            </TooltipContent>
+          </Tooltip>
           
           {isAuthenticated ? (
             <Button
