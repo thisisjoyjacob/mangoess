@@ -86,11 +86,7 @@ export const UseCasesSection = ({
                 {useCases[activeCase].description}
               </p>
               
-              <div className="flex flex-wrap gap-2 mt-6">
-                {useCases[activeCase].connections.map((connection, idx) => <span key={idx} className={`px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r ${useCases[activeCase].color} bg-opacity-10 text-primary`}>
-                    {connection}
-                  </span>)}
-              </div>
+              
             </div>
             
             <div className="relative h-[300px] flex items-center justify-center">
