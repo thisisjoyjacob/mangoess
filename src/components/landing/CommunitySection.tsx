@@ -1,69 +1,55 @@
-
 import { Users, Sparkles, GitBranch, MessageSquare } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { Button } from '@/components/ui/button';
-
 interface CommunitySectionProps {
   show: boolean;
 }
-
-export const CommunitySection = ({ show }: CommunitySectionProps) => {
-  const communityMembers = [
-    { 
-      name: "Alex Thompson", 
-      role: "Data Scientist",
-      avatar: `https://source.unsplash.com/random/100x100?face-1`,
-      contribution: "Knowledge Graph Algorithms"
-    },
-    { 
-      name: "Mira Chen", 
-      role: "Professor",
-      avatar: `https://source.unsplash.com/random/100x100?face-2`,
-      contribution: "Educational Templates"
-    },
-    { 
-      name: "Jason Wright", 
-      role: "Product Designer",
-      avatar: `https://source.unsplash.com/random/100x100?face-3`,
-      contribution: "UI Components"
-    },
-    { 
-      name: "Sophia Kim", 
-      role: "Researcher",
-      avatar: `https://source.unsplash.com/random/100x100?face-4`,
-      contribution: "Citation System"
-    },
-    { 
-      name: "Marcus Jones", 
-      role: "Student",
-      avatar: `https://source.unsplash.com/random/100x100?face-5`,
-      contribution: "Study Guides"
-    }
-  ];
-  
-  const forums = [
-    { 
-      title: "Research Methodology Templates", 
-      replies: 42,
-      views: 1256,
-      category: "Templates"
-    },
-    { 
-      title: "Best practices for literature notes", 
-      replies: 36,
-      views: 982,
-      category: "Workflows"
-    },
-    { 
-      title: "Automated tagging strategies", 
-      replies: 28,
-      views: 874,
-      category: "Automation"
-    }
-  ];
-
-  return (
-    <AnimatedTransition show={show} animation="slide-up" duration={600}>
+export const CommunitySection = ({
+  show
+}: CommunitySectionProps) => {
+  const communityMembers = [{
+    name: "Alex Thompson",
+    role: "Data Scientist",
+    avatar: `https://source.unsplash.com/random/100x100?face-1`,
+    contribution: "Knowledge Graph Algorithms"
+  }, {
+    name: "Mira Chen",
+    role: "Professor",
+    avatar: `https://source.unsplash.com/random/100x100?face-2`,
+    contribution: "Educational Templates"
+  }, {
+    name: "Jason Wright",
+    role: "Product Designer",
+    avatar: `https://source.unsplash.com/random/100x100?face-3`,
+    contribution: "UI Components"
+  }, {
+    name: "Sophia Kim",
+    role: "Researcher",
+    avatar: `https://source.unsplash.com/random/100x100?face-4`,
+    contribution: "Citation System"
+  }, {
+    name: "Marcus Jones",
+    role: "Student",
+    avatar: `https://source.unsplash.com/random/100x100?face-5`,
+    contribution: "Study Guides"
+  }];
+  const forums = [{
+    title: "Research Methodology Templates",
+    replies: 42,
+    views: 1256,
+    category: "Templates"
+  }, {
+    title: "Best practices for literature notes",
+    replies: 36,
+    views: 982,
+    category: "Workflows"
+  }, {
+    title: "Automated tagging strategies",
+    replies: 28,
+    views: 874,
+    category: "Automation"
+  }];
+  return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="mt-24 mb-16">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-1.5 bg-muted rounded-xl mb-4">
@@ -86,13 +72,8 @@ export const CommunitySection = ({ show }: CommunitySectionProps) => {
             </h3>
             
             <div className="space-y-4">
-              {communityMembers.map((member, idx) => (
-                <div key={idx} className="flex items-center p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                  <img 
-                    src={member.avatar} 
-                    alt={member.name} 
-                    className="w-10 h-10 rounded-full object-cover shadow-md"
-                  />
+              {communityMembers.map((member, idx) => <div key={idx} className="flex items-center p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                  <img src={member.avatar} alt={member.name} className="w-10 h-10 rounded-full object-cover shadow-md" />
                   <div className="ml-3 flex-grow">
                     <div className="font-medium text-sm">{member.name}</div>
                     <div className="text-xs text-muted-foreground">{member.role}</div>
@@ -100,8 +81,7 @@ export const CommunitySection = ({ show }: CommunitySectionProps) => {
                   <div className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-md">
                     {member.contribution}
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
             
             <Button variant="outline" className="mt-6 self-center">
@@ -147,8 +127,7 @@ export const CommunitySection = ({ show }: CommunitySectionProps) => {
             </h3>
             
             <div className="space-y-3 mb-4">
-              {forums.map((forum, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 transition-colors">
+              {forums.map((forum, idx) => <div key={idx} className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 transition-colors">
                   <div>
                     <div className="font-medium text-sm">{forum.title}</div>
                     <div className="text-xs text-muted-foreground">
@@ -158,8 +137,7 @@ export const CommunitySection = ({ show }: CommunitySectionProps) => {
                   <span className="text-xs px-2 py-1 bg-secondary/10 text-secondary-foreground rounded-md">
                     {forum.category}
                   </span>
-                </div>
-              ))}
+                </div>)}
             </div>
             
             <Button variant="outline" className="mt-auto self-center">
@@ -168,31 +146,7 @@ export const CommunitySection = ({ show }: CommunitySectionProps) => {
           </div>
         </div>
         
-        <div className="glass-panel rounded-xl p-8 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
-          <div className="relative z-10">
-            <h3 className="text-2xl font-bold mb-4">Monthly Community Call</h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-              Join our monthly community call to meet the team, learn about new features, and share your feedback.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-6">
-              <div className="px-4 py-3 bg-background rounded-lg shadow-sm">
-                <div className="text-2xl font-bold">15</div>
-                <div className="text-xs text-muted-foreground">Days</div>
-              </div>
-              <div className="px-4 py-3 bg-background rounded-lg shadow-sm">
-                <div className="text-2xl font-bold">08</div>
-                <div className="text-xs text-muted-foreground">Hours</div>
-              </div>
-              <div className="px-4 py-3 bg-background rounded-lg shadow-sm">
-                <div className="text-2xl font-bold">42</div>
-                <div className="text-xs text-muted-foreground">Minutes</div>
-              </div>
-            </div>
-            <Button>Register Now</Button>
-          </div>
-        </div>
+        
       </div>
-    </AnimatedTransition>
-  );
+    </AnimatedTransition>;
 };
