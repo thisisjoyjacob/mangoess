@@ -1,5 +1,7 @@
 
 import { useState } from 'react';
+import { HelpCircle } from 'lucide-react';
+import { AnimatedTransition } from '@/components/AnimatedTransition';
 import {
   Accordion,
   AccordionContent,
@@ -7,7 +9,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export const FAQSection = () => {
+interface FAQSectionProps {
+  showFAQs?: boolean;
+}
+
+export const FAQSection = ({ showFAQs = true }: FAQSectionProps) => {
   const [openItem, setOpenItem] = useState<string | null>("item-1");
   
   const faqs = [
@@ -39,28 +45,48 @@ export const FAQSection = () => {
   ];
   
   return (
-    <div className="mt-32 mb-20">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
-        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Everything you need to know about your digital second brain
-        </p>
+    <AnimatedTransition show={showFAQs} animation="slide-up" duration={600}>
+      <div className="mt-32 mb-20">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center p-1.5 bg-muted rounded-xl mb-4">
+            <div className="bg-background px-4 py-2 rounded-lg shadow-sm">
+              <HelpCircle size={22} className="inline-block mr-2 text-primary" />
+              <span className="font-semibold">Frequently Asked Questions</span>
+            </div>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything you need to know</h2>
+          <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">
+            Learn all about your digital second brain and how it can transform your workflow
+          </p>
+        </div>
+        
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 border shadow-lg hover:shadow-xl transition-all duration-300">
+            <Accordion 
+              type="single" 
+              collapsible 
+              value={openItem} 
+              onValueChange={(value) => setOpenItem(value)}
+              className="space-y-2"
+            >
+              {faqs.map((faq) => (
+                <AccordionItem 
+                  key={faq.id} 
+                  value={faq.id}
+                  className="border rounded-lg px-4 shadow-sm data-[state=open]:shadow-md data-[state=open]:bg-muted/20 transition-all"
+                >
+                  <AccordionTrigger className="text-left text-base md:text-lg font-medium py-4">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
       </div>
-      
-      <div className="max-w-3xl mx-auto bg-card/80 backdrop-blur-sm rounded-2xl p-8 border shadow-lg">
-        <Accordion type="single" collapsible value={openItem} onValueChange={(value) => setOpenItem(value)}>
-          {faqs.map((faq) => (
-            <AccordionItem key={faq.id} value={faq.id}>
-              <AccordionTrigger className="text-left text-base md:text-lg font-medium">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </div>
+    </AnimatedTransition>
   );
 };

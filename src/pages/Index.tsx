@@ -17,6 +17,7 @@ const Index = () => {
   const showFeatures = useAnimateIn(false, 1200);
   const showPricing = useAnimateIn(false, 1500);
   const showTestimonials = useAnimateIn(false, 1800);
+  const showFAQs = useAnimateIn(false, 2100);
   
   useEffect(() => {
     // Simulate loading
@@ -57,7 +58,7 @@ const Index = () => {
           <TestimonialsSection showTestimonials={showTestimonials} />
           
           {/* FAQ Section */}
-          <FAQSection />
+          <FAQSection showFAQs={showFAQs} />
           
           {/* Call to Action */}
           <CallToAction />
