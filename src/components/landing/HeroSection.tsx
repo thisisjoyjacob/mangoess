@@ -43,7 +43,7 @@ export const HeroSection = ({ showTitle, showSubtitle, showVisualization }: Hero
         <AnimatedTransition show={showSubtitle} animation="slide-up" duration={800}>
           <div className="flex flex-wrap gap-4 justify-center mt-10">
             <Button size="lg" className="rounded-full text-base px-8 py-6 shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-primary to-accent hover:translate-y-[-2px]">
-              Get Started <ArrowRight size={18} className="ml-2" />
+              Get Started <ArrowRight size={18} />
             </Button>
             <Button variant="outline" size="lg" className="rounded-full text-base px-8 py-6 shadow-sm hover:shadow-md bg-background/70 backdrop-blur-sm hover:bg-background/90 transition-all duration-300 hover:translate-y-[-2px]">
               See Features
