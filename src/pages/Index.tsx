@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useAnimateIn } from '@/lib/animations';
 import { HeroSection } from '@/components/landing/HeroSection';
@@ -20,16 +19,16 @@ const Index = () => {
   const showTitle = useAnimateIn(false, 300);
   const showSubtitle = useAnimateIn(false, 600);
   const showVisualization = useAnimateIn(false, 900);
-  const showFeatures = useAnimateIn(false, 1200);
-  const showIntegrations = useAnimateIn(false, 1500);
-  const showStatistics = useAnimateIn(false, 1800);
+  const showStatistics = useAnimateIn(false, 1200);
+  const showFeatures = useAnimateIn(false, 1500);
+  const showIntegrations = useAnimateIn(false, 1800);
   const showUseCases = useAnimateIn(false, 2100);
-  const showPricing = useAnimateIn(false, 2400);
-  const showTestimonials = useAnimateIn(false, 2700);
-  const showCommunity = useAnimateIn(false, 3000);
+  const showTestimonials = useAnimateIn(false, 2400);
+  const showSecurity = useAnimateIn(false, 2700);
+  const showPricing = useAnimateIn(false, 3000);
   const showBlog = useAnimateIn(false, 3300);
-  const showSecurity = useAnimateIn(false, 3600);
-  const showFAQs = useAnimateIn(false, 3900);
+  const showFAQs = useAnimateIn(false, 3600);
+  const showCommunity = useAnimateIn(false, 3900);
   
   useEffect(() => {
     // Simulate loading
@@ -60,38 +59,38 @@ const Index = () => {
             showVisualization={showVisualization}
           />
           
-          {/* Features Section */}
-          <FeatureSection showFeatures={showFeatures} />
-          
-          {/* New: Integration Showcase Section */}
-          <IntegrationShowcase show={showIntegrations} />
-          
-          {/* New: Statistics Section */}
+          {/* Statistics Section (Growing Fast) */}
           <StatisticsSection show={showStatistics} />
           
-          {/* New: Use Cases Section */}
+          {/* Features Section (Key Features) */}
+          <FeatureSection showFeatures={showFeatures} />
+          
+          {/* Integration Showcase Section (Seamless Integrations) */}
+          <IntegrationShowcase show={showIntegrations} />
+          
+          {/* Use Cases Section */}
           <UseCasesSection show={showUseCases} />
           
-          {/* Pricing Section */}
-          <PricingSection showPricing={showPricing} />
-          
-          {/* Testimonials Section */}
+          {/* Testimonials Section (What Our Users Say) */}
           <TestimonialsSection showTestimonials={showTestimonials} />
           
-          {/* New: Community Section */}
-          <CommunitySection show={showCommunity} />
-          
-          {/* New: Blog/Resources Section */}
-          <BlogSection show={showBlog} />
-          
-          {/* New: Security & Privacy Section */}
+          {/* Security & Privacy Section */}
           <SecuritySection show={showSecurity} />
           
-          {/* FAQ Section */}
+          {/* Pricing Section (Pricing Plans) */}
+          <PricingSection showPricing={showPricing} />
+          
+          {/* Call to Action (Ready to transform) */}
+          <CallToAction />
+          
+          {/* Blog/Resources Section (Resources & Blog) */}
+          <BlogSection show={showBlog} />
+          
+          {/* FAQ Section - keeping but not in the requested order list */}
           <FAQSection showFAQs={showFAQs} />
           
-          {/* Call to Action */}
-          <CallToAction />
+          {/* Community Section - keeping but not in the requested order list */}
+          <CommunitySection show={showCommunity} />
         </div>
       </div>
     </div>
