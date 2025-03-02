@@ -8,18 +8,9 @@ const SearchPage = () => {
   const showContent = useAnimateIn(false, 300);
   
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+    <div className="max-w-full mx-auto px-4 py-6">
       <AnimatedTransition show={showContent} animation="slide-up">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">Universal Search</h1>
-          <p className="text-muted-foreground mt-2">
-            Find anything in your second brain with AI-powered search
-          </p>
-        </div>
-        
-        <div className="mt-6">
-          <Search />
-        </div>
+        <Search />
       </AnimatedTransition>
     </div>
   );
