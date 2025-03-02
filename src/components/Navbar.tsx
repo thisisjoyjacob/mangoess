@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, LogIn, Search, Upload, User, Settings, LogOut } from 'lucide-react';
@@ -60,12 +59,10 @@ export const Navbar = () => {
     setIsAuthModalOpen(false);
   };
 
-  // Basic navigation items - only Brain is accessible when not authenticated
   const baseNavItems = [
-    { to: '/', icon: <Brain size={20} />, label: 'Brain', id: 'home' },
+    { to: '/', icon: <Brain size={20} />, label: 'Cortex', id: 'home' },
   ];
   
-  // Navigation items available after authentication
   const authNavItems = [
     { to: '/search', icon: <Search size={20} />, label: 'Search', id: 'search' },
     { to: '/import', icon: <Upload size={20} />, label: 'Import', id: 'import' },
@@ -73,7 +70,6 @@ export const Navbar = () => {
     { to: '/settings', icon: <Settings size={20} />, label: 'Settings', id: 'settings' },
   ];
 
-  // Determine which items to show based on auth state
   const navItems = isAuthenticated 
     ? [...baseNavItems, ...authNavItems]
     : baseNavItems;
