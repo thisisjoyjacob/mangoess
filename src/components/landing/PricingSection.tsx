@@ -86,8 +86,8 @@ export const PricingSection = ({ showPricing }: PricingSectionProps) => {
           {pricingPlans.map((plan, index) => (
             <Card key={index} className={`border relative overflow-hidden ${plan.popular ? 'shadow-xl ring-1 ring-primary/50 scale-105 md:scale-110 z-10' : 'shadow-md hover:shadow-lg'} transition-all duration-300 hover:translate-y-[-4px]`}>
               {plan.popular && (
-                <div className="absolute -top-3 inset-x-0 flex justify-center">
-                  <div className="px-4 py-1 bg-gradient-to-r from-primary to-accent rounded-full text-xs font-medium text-white shadow-md">
+                <div className="absolute top-0 inset-x-0 flex justify-center">
+                  <div className="px-4 py-1 bg-primary text-primary-foreground rounded-b-lg text-xs font-medium shadow-md">
                     Most Popular
                   </div>
                 </div>
