@@ -8,7 +8,7 @@ const SearchPage = () => {
   const showContent = useAnimateIn(false, 300);
   
   return (
-    <div className="max-w-full mx-auto px-4 py-6">
+    <div className="max-w-full mx-auto px-4 pt-24 pb-6">
       <AnimatedTransition show={showContent} animation="slide-up">
         <Search />
       </AnimatedTransition>
