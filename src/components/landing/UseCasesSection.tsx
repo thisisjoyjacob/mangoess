@@ -65,9 +65,7 @@ export const UseCasesSection = ({
         
         <div className="grid grid-cols-1 md:grid-cols-5 gap-3 mb-8">
           {useCases.map((useCase, idx) => <div key={idx} onClick={() => setActiveCase(idx)} className={cn("glass-panel rounded-xl p-4 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-md", activeCase === idx ? "ring-2 ring-primary shadow-md" : "")}>
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${useCase.color} flex items-center justify-center mb-3 shadow-md`}>
-                {useCase.icon}
-              </div>
+              
               <h3 className="font-semibold">{useCase.title}</h3>
             </div>)}
         </div>
