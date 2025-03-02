@@ -1,8 +1,11 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { UserProfile } from '@/lib/types';
 import { CheckCircle2, Clock, Edit, ExternalLink, Flag, Lock, Mail, MessageSquare, Plus, Star, ThumbsUp, Users } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const sampleProfile: UserProfile = {
   name: 'Alex Johnson',
@@ -89,7 +92,8 @@ const enhancedProjects: ProjectWithStage[] = [
 
 const ProjectRoadmap: React.FC = () => {
   const [projects, setProjects] = useState<ProjectWithStage[]>(enhancedProjects);
-  const profile = sampleProfile;
+  const [editingProject, setEditingProject] = useState<ProjectWithStage | null>(null);
+  const [draggedProject, setDraggedProject] = useState<ProjectWithStage | null>(null);
   
   const addNewProject = () => {
     const newProject: ProjectWithStage = {
@@ -117,6 +121,42 @@ const ProjectRoadmap: React.FC = () => {
       }
       return project;
     }));
+  };
+  
+  const handleDragStart = (project: ProjectWithStage) => {
+    setDraggedProject(project);
+  };
+  
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+  
+  const handleDrop = (targetStage: ProjectWithStage['stage']) => {
+    if (draggedProject && draggedProject.stage !== targetStage) {
+      setProjects(projects.map(project => 
+        project.id === draggedProject.id 
+          ? { ...project, stage: targetStage } 
+          : project
+      ));
+      setDraggedProject(null);
+    }
+  };
+  
+  const startEditingProject = (project: ProjectWithStage) => {
+    setEditingProject({...project});
+  };
+  
+  const saveProjectChanges = () => {
+    if (editingProject) {
+      setProjects(projects.map(project => 
+        project.id === editingProject.id ? editingProject : project
+      ));
+      setEditingProject(null);
+    }
+  };
+  
+  const cancelEditingProject = () => {
+    setEditingProject(null);
   };
   
   const renderStageIcon = (stage: ProjectWithStage['stage']) => {
@@ -164,42 +204,48 @@ const ProjectRoadmap: React.FC = () => {
     }
   };
   
+  if (editingProject) {
+    return (
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Edit Project</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="projectTitle">Project Title</Label>
+            <Input 
+              id="projectTitle" 
+              value={editingProject.title}
+              onChange={(e) => setEditingProject({...editingProject, title: e.target.value})}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="projectDescription">Description</Label>
+            <Input 
+              id="projectDescription" 
+              value={editingProject.description}
+              onChange={(e) => setEditingProject({...editingProject, description: e.target.value})}
+            />
+          </div>
+        </CardContent>
+        <CardFooter className="flex justify-end gap-2">
+          <Button variant="outline" onClick={cancelEditingProject}>Cancel</Button>
+          <Button onClick={saveProjectChanges}>Save Changes</Button>
+        </CardFooter>
+      </Card>
+    );
+  }
+  
   return (
     <div className="w-full space-y-8">
-      <Card className="w-full">
-        <CardHeader className="flex flex-row items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-            <span className="text-2xl font-light">{profile.name.charAt(0)}</span>
-          </div>
-          
-          <div>
-            <CardTitle>{profile.name}</CardTitle>
-            <CardDescription className="flex items-center mt-1">
-              <Mail className="h-4 w-4 mr-1" />
-              {profile.email}
-            </CardDescription>
-          </div>
-          
-          <div className="ml-auto flex gap-2">
-            {profile.links?.map((link, index) => (
-              <a 
-                key={index} 
-                href={link.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary/10 text-secondary-foreground text-sm font-medium hover:bg-secondary/20 transition-colors"
-              >
-                {link.title}
-                <ExternalLink size={14} />
-              </a>
-            ))}
-          </div>
-        </CardHeader>
-      </Card>
-      
       <div className="grid grid-cols-4 gap-4">
         {(['planning', 'inProgress', 'review', 'completed'] as ProjectWithStage['stage'][]).map(stage => (
-          <div key={stage} className="space-y-4">
+          <div 
+            key={stage} 
+            className="space-y-4"
+            onDragOver={handleDragOver}
+            onDrop={() => handleDrop(stage)}
+          >
             <div className={`flex items-center justify-between p-3 rounded-lg ${renderStageColor(stage)} border`}>
               <div className="flex items-center gap-2">
                 {renderStageIcon(stage)}
@@ -222,7 +268,10 @@ const ProjectRoadmap: React.FC = () => {
                 .map(project => (
                   <Card 
                     key={project.id} 
-                    className="border transition-all hover:shadow-md"
+                    className="border transition-all hover:shadow-md cursor-pointer"
+                    draggable
+                    onDragStart={() => handleDragStart(project)}
+                    onClick={() => startEditingProject(project)}
                   >
                     <CardHeader className="p-4 pb-2">
                       <CardTitle className="text-base">{project.title}</CardTitle>
@@ -249,21 +298,30 @@ const ProjectRoadmap: React.FC = () => {
                         </div>
                       )}
                       
-                      {stage !== 'completed' && (
-                        <button 
-                          onClick={() => moveToNextStage(project.id)}
-                          className="ml-auto text-xs flex items-center gap-1 px-2 py-1 rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                      <div className="ml-auto flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            startEditingProject(project);
+                          }}
+                          className="text-xs flex items-center gap-1 px-2 py-1 rounded-md bg-secondary/10 text-secondary-foreground hover:bg-secondary/20 transition-colors"
                         >
-                          {stage === 'planning' ? 'Start' : stage === 'inProgress' ? 'Submit for Review' : 'Complete'}
+                          <Edit size={12} />
+                          Edit
                         </button>
-                      )}
-                      
-                      {stage === 'completed' && (
-                        <div className="ml-auto flex items-center gap-1">
-                          <ThumbsUp size={14} className="text-green-500" />
-                          <span className="text-xs text-muted-foreground">Completed</span>
-                        </div>
-                      )}
+                        
+                        {stage !== 'completed' && (
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              moveToNextStage(project.id);
+                            }}
+                            className="text-xs flex items-center gap-1 px-2 py-1 rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                          >
+                            {stage === 'planning' ? 'Start' : stage === 'inProgress' ? 'Submit for Review' : 'Complete'}
+                          </button>
+                        )}
+                      </div>
                     </CardFooter>
                   </Card>
                 ))}
