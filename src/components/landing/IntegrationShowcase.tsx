@@ -83,7 +83,7 @@ export const IntegrationShowcase = ({
 
         <div className="flex flex-col space-y-8">
           {/* Horizontal Integration Display - Improved to show all logos better */}
-          <div className="flex overflow-x-auto pb-4 justify-center gap-4 md:gap-6 px-2">
+          <div className="flex overflow-x-auto pb-4 justify-center gap-4 md:gap-6 py-[26px] px-[9px] mx-0 my-[11px]">
             {integrations.map((integration, index) => <div key={integration.name} className={`transition-all duration-300 flex-shrink-0 ${index === activeIndex ? "scale-110 shadow-lg" : "scale-100 opacity-80"}`} onClick={() => setActiveIndex(index)}>
                 <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-2xl ${integration.color} shadow-md flex items-center justify-center cursor-pointer hover:shadow-xl transition-all duration-300`}>
                   <svg viewBox="0 0 24 24" className="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
