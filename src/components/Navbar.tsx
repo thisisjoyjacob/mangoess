@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, LogIn, Search, Upload, User, Settings, LogOut, Moon, Sun, Table, Info, HelpCircle, Code } from 'lucide-react';
@@ -17,6 +16,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 interface NavItemProps {
   to: string;
@@ -30,7 +30,6 @@ interface NavItemProps {
 
 const NavItem = ({ to, icon, label, active, onClick, hasSubmenu, children }: NavItemProps) => {
   const handleRipple = useRippleEffect();
-  const [isHovered, setIsHovered] = useState(false);
   
   if (hasSubmenu) {
     return (
@@ -64,34 +63,36 @@ const NavItem = ({ to, icon, label, active, onClick, hasSubmenu, children }: Nav
   }
   
   return (
-    <Link 
-      to={to} 
-      className={cn(
-        "relative flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300",
-        "hover:bg-primary/10 hover:text-primary",
-        "overflow-hidden",
-        active ? "bg-primary/10 text-primary" : "text-foreground/80"
-      )}
-      onClick={(e) => {
-        handleRipple(e);
-        onClick();
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <span className={cn(
-        "transition-all duration-300",
-        active ? "text-primary" : "text-foreground/60"
-      )}>
-        {icon}
-      </span>
-      {(active || isHovered) && (
-        <span className="font-medium transition-all duration-300">{label}</span>
-      )}
-      {active && (
-        <span className="absolute bottom-0 left-0 h-0.5 w-full bg-primary transform origin-left"></span>
-      )}
-    </Link>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Link 
+          to={to} 
+          className={cn(
+            "relative flex items-center justify-center px-4 py-3 rounded-lg transition-all duration-300",
+            "hover:bg-primary/10 hover:text-primary",
+            "overflow-hidden",
+            active ? "bg-primary/10 text-primary" : "text-foreground/80"
+          )}
+          onClick={(e) => {
+            handleRipple(e);
+            onClick();
+          }}
+        >
+          <span className={cn(
+            "transition-all duration-300",
+            active ? "text-primary" : "text-foreground/60"
+          )}>
+            {icon}
+          </span>
+          {active && (
+            <span className="ml-2 font-medium">{label}</span>
+          )}
+        </Link>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{label}</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
 
@@ -152,19 +153,33 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-lg px-1 py-1">
-        <nav className="flex items-center">
-          {/* Cortex with submenu */}
-          <NavItem
-            to="#"
-            icon={<Brain size={20} />}
-            label="Cortex"
-            active={['what', 'why', 'how'].includes(active)}
-            onClick={() => {}}
-            hasSubmenu={true}
-          >
-            {cortexSubmenu.map((item) => (
-              <SubMenuItem
+      <TooltipProvider>
+        <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-lg px-1 py-1">
+          <nav className="flex items-center">
+            {/* Cortex with submenu */}
+            <NavItem
+              to="#"
+              icon={<Brain size={20} />}
+              label="Cortex"
+              active={['what', 'why', 'how'].includes(active)}
+              onClick={() => {}}
+              hasSubmenu={true}
+            >
+              {cortexSubmenu.map((item) => (
+                <SubMenuItem
+                  key={item.id}
+                  to={item.to}
+                  icon={item.icon}
+                  label={item.label}
+                  active={active === item.id}
+                  onClick={() => handleNavItemClick(item.id)}
+                />
+              ))}
+            </NavItem>
+            
+            {/* Other nav items */}
+            {navItems.map((item) => (
+              <NavItem
                 key={item.id}
                 to={item.to}
                 icon={item.icon}
@@ -173,57 +188,59 @@ export const Navbar = () => {
                 onClick={() => handleNavItemClick(item.id)}
               />
             ))}
-          </NavItem>
-          
-          {/* Other nav items */}
-          {navItems.map((item) => (
-            <NavItem
-              key={item.id}
-              to={item.to}
-              icon={item.icon}
-              label={item.label}
-              active={active === item.id}
-              onClick={() => handleNavItemClick(item.id)}
-            />
-          ))}
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-full ml-1"
-                onClick={toggleTheme}
-              >
-                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Toggle {theme === 'dark' ? 'light' : 'dark'} mode</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          {isAuthenticated ? (
-            <Button
-              variant="ghost"
-              className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground"
-              onClick={logout}
-            >
-              <LogOut size={20} />
-              <span className="font-medium">Logout</span>
-            </Button>
-          ) : (
-            <Button
-              variant="ghost"
-              className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground"
-              onClick={handleOpenAuthModal}
-            >
-              <LogIn size={20} />
-              <span className="font-medium">Login</span>
-            </Button>
-          )}
-        </nav>
-      </header>
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-lg ml-1"
+                  onClick={toggleTheme}
+                >
+                  {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Toggle {theme === 'dark' ? 'light' : 'dark'} mode</p>
+              </TooltipContent>
+            </Tooltip>
+            
+            {isAuthenticated ? (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground"
+                    onClick={logout}
+                  >
+                    <LogOut size={20} />
+                    {active === 'logout' && <span className="font-medium">Logout</span>}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Logout</p>
+                </TooltipContent>
+              </Tooltip>
+            ) : (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground"
+                    onClick={handleOpenAuthModal}
+                  >
+                    <LogIn size={20} />
+                    {active === 'login' && <span className="font-medium">Login</span>}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Login</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
+          </nav>
+        </header>
+      </TooltipProvider>
       
       <AuthModal isOpen={isAuthModalOpen} onClose={handleCloseAuthModal} />
     </>
