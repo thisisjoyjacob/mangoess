@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, LogIn, Search, Upload, User, Settings, LogOut, Moon, Sun, Table, Info, HelpCircle, Code } from 'lucide-react';
@@ -30,17 +29,20 @@ interface NavItemProps {
 
 const NavItem = ({ to, icon, label, active, onClick, hasSubmenu, children }: NavItemProps) => {
   const handleRipple = useRippleEffect();
+  const [isHovered, setIsHovered] = useState(false);
   
   if (hasSubmenu) {
     return (
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className={cn(
-              "relative flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300",
-              "hover:bg-primary/10 hover:text-primary", 
-              active ? "bg-primary/10 text-primary" : "text-foreground/80"
-            )}>
+            <NavigationMenuTrigger 
+              className={cn(
+                "relative flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300",
+                "hover:bg-primary/10 hover:text-primary", 
+                active ? "bg-primary/10 text-primary" : "text-foreground/80"
+              )}
+            >
               <span className={cn(
                 "transition-all duration-300",
                 active ? "text-primary" : "text-foreground/60"
@@ -73,6 +75,8 @@ const NavItem = ({ to, icon, label, active, onClick, hasSubmenu, children }: Nav
         handleRipple(e);
         onClick();
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <span className={cn(
         "transition-all duration-300",
@@ -80,7 +84,9 @@ const NavItem = ({ to, icon, label, active, onClick, hasSubmenu, children }: Nav
       )}>
         {icon}
       </span>
-      <span className="font-medium">{label}</span>
+      {(active || isHovered) && (
+        <span className="font-medium transition-all duration-300">{label}</span>
+      )}
       {active && (
         <span className="absolute bottom-0 left-0 h-0.5 w-full bg-primary transform origin-left"></span>
       )}
