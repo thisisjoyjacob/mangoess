@@ -3,7 +3,6 @@ import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { Button } from '@/components/ui/button';
 import { Plus, Brain, Book, ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
 interface UseCasesSectionProps {
   show: boolean;
 }
@@ -112,7 +111,7 @@ const UseCasesSection = ({
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-4 mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-tight">
+          <h2 className="text-3xl text-center mb-12 tracking-tight text-blue-700 font-bold md:text-7xl">
             For visual minds of all kinds.
           </h2>
           
