@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { useState, useEffect } from 'react';
@@ -34,7 +33,6 @@ export const DesignSection = ({
   const [category, setCategory] = useState(0);
   const [animating, setAnimating] = useState(false);
 
-  // Rotate through categories automatically
   useEffect(() => {
     const timer = setInterval(() => {
       setAnimating(true);
@@ -42,17 +40,16 @@ export const DesignSection = ({
         setCategory((prev) => (prev + 1) % templateCategories.length);
         setCurrentTemplates(
           templateCategories[(category + 1) % templateCategories.length].templates
-            .sort(() => Math.random() - 0.5) // Randomize order
-            .slice(0, 8) // Display 8 templates
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 8)
         );
         setAnimating(false);
-      }, 500); // Wait for fade out
-    }, 5000); // Change every 5 seconds
+      }, 500);
+    }, 5000);
     
     return () => clearInterval(timer);
   }, [category]);
 
-  // Initialize templates
   useEffect(() => {
     setCurrentTemplates(
       templateCategories[0].templates
@@ -61,7 +58,6 @@ export const DesignSection = ({
     );
   }, []);
 
-  // Handle manual category change
   const changeCategory = (index: number) => {
     if (category === index || animating) return;
     
@@ -80,12 +76,13 @@ export const DesignSection = ({
   return (
     <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-12">
+        <div className="flex flex-col items-start gap-2 mb-12">
           <h2 className="text-4xl font-bold text-primary md:text-8xl">Design</h2>
-          <p className="text-foreground max-w-md text-4xl">Choose from over 200+ ready-to-use templates tailored to your needs.</p>
+          <p className="text-foreground max-w-xl text-xl md:text-3xl mt-2">
+            Choose from over 200+ ready-to-use templates tailored to your needs.
+          </p>
         </div>
 
-        {/* Category indicators */}
         <div className="flex justify-center space-x-2 mb-12">
           {templateCategories.map((cat, idx) => (
             <button
@@ -101,7 +98,6 @@ export const DesignSection = ({
           ))}
         </div>
 
-        {/* Current category title */}
         <AnimatedTransition 
           show={!animating} 
           animation="fade" 
@@ -113,7 +109,6 @@ export const DesignSection = ({
           </h3>
         </AnimatedTransition>
 
-        {/* Template showcase */}
         <div className="relative">
           <AnimatedTransition 
             show={!animating} 
@@ -138,7 +133,6 @@ export const DesignSection = ({
           </AnimatedTransition>
         </div>
 
-        {/* View all templates button */}
         <div className="flex justify-center mt-10">
           <Button size="lg" className="group">
             View All Templates

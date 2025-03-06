@@ -25,9 +25,9 @@ export const DeploySection = ({
   }];
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-12">
+        <div className="flex flex-col items-start gap-2 mb-12">
           <h2 className="text-4xl font-bold text-primary md:text-8xl">Deploy</h2>
-          <p className="text-foreground max-w-md text-4xl">
+          <p className="text-foreground max-w-xl text-xl md:text-3xl mt-2">
             Take your AI-driven work to the next level.
           </p>
         </div>
