@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, LogIn, Search, Upload, User, Settings, LogOut, Moon, Sun, Table, Info, HelpCircle, Code } from 'lucide-react';
@@ -151,7 +152,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-full px-1 py-1">
+      <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-lg px-1 py-1">
         <nav className="flex items-center">
           {/* Cortex with submenu */}
           <NavItem
