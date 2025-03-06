@@ -2,9 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useAnimateIn } from '@/lib/animations';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { ManageSection } from '@/components/landing/ManageSection';
-import { DesignSection } from '@/components/landing/DesignSection';
-import { DeploySection } from '@/components/landing/DeploySection';
+import { TabsSection } from '@/components/landing/TabsSection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
 import { CallToAction } from '@/components/landing/CallToAction';
 import { LoadingScreen } from '@/components/landing/LoadingScreen';
@@ -13,12 +11,10 @@ import UseCasesSection from '@/components/landing/UseCasesSection';
 const Index = () => {
   const [loading, setLoading] = useState(true);
   const showHero = useAnimateIn(false, 300);
-  const showManage = useAnimateIn(false, 600);
-  const showDesign = useAnimateIn(false, 900);
-  const showDeploy = useAnimateIn(false, 1200);
-  const showUseCases = useAnimateIn(false, 1500);
-  const showTestimonials = useAnimateIn(false, 1800);
-  const showCallToAction = useAnimateIn(false, 2100);
+  const showTabs = useAnimateIn(false, 600);
+  const showUseCases = useAnimateIn(false, 1200);
+  const showTestimonials = useAnimateIn(false, 1500);
+  const showCallToAction = useAnimateIn(false, 1800);
   
   useEffect(() => {
     // Simulate loading
@@ -45,14 +41,8 @@ const Index = () => {
           {/* Hero Section */}
           <HeroSection showTitle={showHero} />
           
-          {/* Manage Section */}
-          <ManageSection show={showManage} />
-          
-          {/* Design Section */}
-          <DesignSection show={showDesign} />
-          
-          {/* Deploy Section */}
-          <DeploySection show={showDeploy} />
+          {/* Tabs Section (replacing individual sections) */}
+          <TabsSection show={showTabs} />
           
           {/* Use Cases Section */}
           <UseCasesSection show={showUseCases} />
