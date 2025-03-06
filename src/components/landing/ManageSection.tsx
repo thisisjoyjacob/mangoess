@@ -65,7 +65,7 @@ export const ManageSection = ({
         </div>
 
         <div className="mb-12 border border-border/50 rounded-lg overflow-hidden shadow-lg">
-          <img alt="Dashboard visualization" className="w-full h-auto" src="/lovable-uploads/daaf4041-7ba0-4623-a56d-9e7347f7572e.png" />
+          
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
