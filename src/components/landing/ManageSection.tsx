@@ -58,8 +58,8 @@ export const ManageSection = ({
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary">Manage</h2>
-          <p className="text-xl text-foreground max-w-md">
+          <h2 className="text-4xl font-bold text-primary md:text-8xl">Manage</h2>
+          <p className="text-foreground max-w-md text-4xl">
             Build & maintain a scalable personal AI engine.
           </p>
         </div>
