@@ -1,5 +1,5 @@
 
-import { Plus, PuzzlePiece, BrainCircuit, Brain, Sparkles, Paperclip, Monitor, Search, Lock, ScanSearch, Share, Sun } from 'lucide-react';
+import { Plus, Puzzle, BrainCircuit, Brain, Sparkles, Paperclip, Monitor, Search, Lock, ScanSearch, Share, Sun } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 
 interface ManageSectionProps {
@@ -14,7 +14,7 @@ export const ManageSection = ({ show }: ManageSectionProps) => {
       description: "Seamlessly import data (CSV, HTML, AI scraping, or clipping) or create new entries effortlessly."
     },
     {
-      icon: <PuzzlePiece size={32} className="text-primary" />,
+      icon: <Puzzle size={32} className="text-primary" />,
       title: "Plug & Play",
       description: "Fully customizable with an open-source framework that adapts to your workflow."
     },
