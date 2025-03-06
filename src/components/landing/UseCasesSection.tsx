@@ -34,7 +34,7 @@ const UseCasesSection = ({
           </div>
           
           <div className={cn("rounded-xl overflow-hidden transition-all duration-500", currentCase.background, currentCase.textColor)}>
-            <div className="p-10 md:p-16 bg-gray-950">
+            <div className="p-10 md:p-16 bg-blue-400">
               <div className="text-center mb-4">
                 <p className="uppercase tracking-wide text-sm font-medium mb-6">Made for {activeUserType}</p>
                 <h3 className="text-4xl md:text-5xl font-medium mb-2">
