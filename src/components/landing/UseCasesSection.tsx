@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { cn } from '@/lib/utils';
@@ -12,17 +11,15 @@ import WritersCase from './UserCases/WritersCase';
 import ResearchersCase from './UserCases/ResearchersCase';
 import DevelopersCase from './UserCases/DevelopersCase';
 import EveryoneCase from './UserCases/EveryoneCase';
-
 interface UseCasesSectionProps {
   show: boolean;
 }
-
-const UseCasesSection = ({ show }: UseCasesSectionProps) => {
+const UseCasesSection = ({
+  show
+}: UseCasesSectionProps) => {
   const [activeUserType, setActiveUserType] = useState<UserType>('Marketers');
   const currentCase = userCasesData[activeUserType];
-
-  return (
-    <AnimatedTransition show={show} animation="slide-up" duration={600}>
+  return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-4 mb-16">
           <h2 className="text-3xl text-center mb-12 tracking-tight text-blue-700 font-bold md:text-7xl">
@@ -30,31 +27,14 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
           </h2>
           
           <div className="flex justify-center space-x-8 mb-10">
-            {Object.keys(userCasesData).map(type => (
-              <button 
-                key={type} 
-                className={cn(
-                  "relative pb-1", 
-                  activeUserType === type 
-                    ? "text-primary font-medium" 
-                    : "text-muted-foreground hover:text-foreground transition-colors"
-                )} 
-                onClick={() => setActiveUserType(type as UserType)}
-              >
+            {Object.keys(userCasesData).map(type => <button key={type} className={cn("relative pb-1", activeUserType === type ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground transition-colors")} onClick={() => setActiveUserType(type as UserType)}>
                 {type}
-                {activeUserType === type && (
-                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />
-                )}
-              </button>
-            ))}
+                {activeUserType === type && <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />}
+              </button>)}
           </div>
           
-          <div className={cn(
-            "rounded-xl overflow-hidden transition-all duration-500",
-            currentCase.background,
-            currentCase.textColor
-          )}>
-            <div className="p-10 md:p-16">
+          <div className={cn("rounded-xl overflow-hidden transition-all duration-500", currentCase.background, currentCase.textColor)}>
+            <div className="p-10 md:p-16 bg-gray-950">
               <div className="text-center mb-4">
                 <p className="uppercase tracking-wide text-sm font-medium mb-6">Made for {activeUserType}</p>
                 <h3 className="text-4xl md:text-5xl font-medium mb-2">
@@ -74,8 +54,6 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
           </div>
         </div>
       </div>
-    </AnimatedTransition>
-  );
+    </AnimatedTransition>;
 };
-
 export default UseCasesSection;
