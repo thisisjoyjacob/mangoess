@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, LogIn, Search, Upload, User, Settings, LogOut, Moon, Sun, Table, Info, HelpCircle, Code } from 'lucide-react';
@@ -37,7 +38,7 @@ const NavItem = ({ to, icon, label, active, onClick, hasSubmenu, children }: Nav
           <NavigationMenuItem>
             <NavigationMenuTrigger className={cn(
               "relative flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300",
-              "hover:bg-primary/10", 
+              "hover:bg-primary/10 hover:text-primary", 
               active ? "bg-primary/10 text-primary" : "text-foreground/80"
             )}>
               <span className={cn(
@@ -64,7 +65,7 @@ const NavItem = ({ to, icon, label, active, onClick, hasSubmenu, children }: Nav
       to={to} 
       className={cn(
         "relative flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300",
-        "hover:bg-primary/10",
+        "hover:bg-primary/10 hover:text-primary",
         "overflow-hidden",
         active ? "bg-primary/10 text-primary" : "text-foreground/80"
       )}
@@ -92,12 +93,17 @@ const SubMenuItem = ({ to, icon, label, active, onClick }: NavItemProps) => {
     <Link 
       to={to} 
       className={cn(
-        "flex items-center gap-2 p-2 rounded-md hover:bg-accent",
-        active ? "bg-accent/50" : ""
+        "flex items-center gap-2 p-2 rounded-md hover:bg-primary/10 hover:text-primary transition-all duration-300",
+        active ? "bg-primary/10 text-primary" : ""
       )}
       onClick={onClick}
     >
-      <span className="text-foreground/60">{icon}</span>
+      <span className={cn(
+        "transition-all duration-300",
+        active ? "text-primary" : "text-foreground/60"
+      )}>
+        {icon}
+      </span>
       <span>{label}</span>
     </Link>
   );
