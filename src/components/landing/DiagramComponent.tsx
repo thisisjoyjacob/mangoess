@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Brain, FileText, Bookmark, Image, Network, Search, ArrowRight } from 'lucide-react';
+import { Brain, FileText, Bookmark, Image, Network, Search, ArrowRight, ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type DiagramSection = 'scattered' | 'convergence' | 'organized';
@@ -57,9 +57,11 @@ const DiagramComponent = ({ onSectionClick, activeSection }: DiagramComponentPro
           <div className="absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10"></div>
           <div className="absolute w-3/5 h-3/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20"></div>
           
-          {/* Arrows pointing to center */}
+          {/* Left arrow */}
           <ArrowRight className="absolute -left-10 top-1/2 -translate-y-1/2 w-8 h-8 text-primary/50" />
-          <ArrowRight className="absolute -right-10 top-1/2 -translate-y-1/2 w-8 h-8 text-primary/50 rotate-180" />
+          
+          {/* Right arrow - changed to ArrowLeft to point toward the center */}
+          <ArrowLeft className="absolute -right-10 top-1/2 -translate-y-1/2 w-8 h-8 text-primary/50" />
           
           <div className="absolute w-12 h-12 md:w-16 md:h-16 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/30 flex items-center justify-center shadow-lg">
             <Brain className="w-7 h-7 md:w-9 md:h-9 text-primary" />
