@@ -1,34 +1,22 @@
+
 import { useState, useEffect } from 'react';
 import { useAnimateIn } from '@/lib/animations';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { FeatureSection } from '@/components/landing/FeatureSection';
-import { PricingSection } from '@/components/landing/PricingSection';
+import { ManageSection } from '@/components/landing/ManageSection';
+import { DesignSection } from '@/components/landing/DesignSection';
+import { DeploySection } from '@/components/landing/DeploySection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
-import { FAQSection } from '@/components/landing/FAQSection';
 import { CallToAction } from '@/components/landing/CallToAction';
 import { LoadingScreen } from '@/components/landing/LoadingScreen';
-import { IntegrationShowcase } from '@/components/landing/IntegrationShowcase';
-import { StatisticsSection } from '@/components/landing/StatisticsSection';
-import { UseCasesSection } from '@/components/landing/UseCasesSection';
-import { CommunitySection } from '@/components/landing/CommunitySection';
-import { BlogSection } from '@/components/landing/BlogSection';
-import { SecuritySection } from '@/components/landing/SecuritySection';
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
-  const showTitle = useAnimateIn(false, 300);
-  const showSubtitle = useAnimateIn(false, 600);
-  const showVisualization = useAnimateIn(false, 900);
-  const showStatistics = useAnimateIn(false, 1200);
-  const showFeatures = useAnimateIn(false, 1500);
-  const showIntegrations = useAnimateIn(false, 1800);
-  const showUseCases = useAnimateIn(false, 2100);
-  const showTestimonials = useAnimateIn(false, 2400);
-  const showSecurity = useAnimateIn(false, 2700);
-  const showPricing = useAnimateIn(false, 3000);
-  const showBlog = useAnimateIn(false, 3300);
-  const showFAQs = useAnimateIn(false, 3600);
-  const showCommunity = useAnimateIn(false, 3900);
+  const showHero = useAnimateIn(false, 300);
+  const showManage = useAnimateIn(false, 600);
+  const showDesign = useAnimateIn(false, 900);
+  const showDeploy = useAnimateIn(false, 1200);
+  const showTestimonials = useAnimateIn(false, 1500);
+  const showCallToAction = useAnimateIn(false, 1800);
   
   useEffect(() => {
     // Simulate loading
@@ -53,44 +41,22 @@ const Index = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
         <div className="flex flex-col">
           {/* Hero Section */}
-          <HeroSection 
-            showTitle={showTitle}
-            showSubtitle={showSubtitle}
-            showVisualization={showVisualization}
-          />
+          <HeroSection showTitle={showHero} />
           
-          {/* Statistics Section (Growing Fast) */}
-          <StatisticsSection show={showStatistics} />
+          {/* Manage Section */}
+          <ManageSection show={showManage} />
           
-          {/* Features Section (Key Features) */}
-          <FeatureSection showFeatures={showFeatures} />
+          {/* Design Section */}
+          <DesignSection show={showDesign} />
           
-          {/* Integration Showcase Section (Seamless Integrations) */}
-          <IntegrationShowcase show={showIntegrations} />
+          {/* Deploy Section */}
+          <DeploySection show={showDeploy} />
           
-          {/* Use Cases Section */}
-          <UseCasesSection show={showUseCases} />
-          
-          {/* Testimonials Section (What Our Users Say) */}
+          {/* Testimonials Section */}
           <TestimonialsSection showTestimonials={showTestimonials} />
           
-          {/* Security & Privacy Section */}
-          <SecuritySection show={showSecurity} />
-          
-          {/* Pricing Section (Pricing Plans) */}
-          <PricingSection showPricing={showPricing} />
-          
-          {/* Call to Action (Ready to transform) */}
-          <CallToAction />
-          
-          {/* Blog/Resources Section (Resources & Blog) */}
-          <BlogSection show={showBlog} />
-          
-          {/* FAQ Section - keeping but not in the requested order list */}
-          <FAQSection showFAQs={showFAQs} />
-          
-          {/* Community Section - keeping but not in the requested order list */}
-          <CommunitySection show={showCommunity} />
+          {/* Call to Action */}
+          <CallToAction show={showCallToAction} />
         </div>
       </div>
     </div>
