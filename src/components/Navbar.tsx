@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Brain, LogIn, Search, Upload, User, Settings, LogOut, Moon, Sun, Table } from 'lucide-react';
+import { Brain, LogIn, Search, Upload, User, Settings, LogOut, Moon, Sun, Table, Info, HelpCircle, Code } from 'lucide-react';
 import { useRippleEffect } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
@@ -9,6 +8,14 @@ import { useTheme } from '@/contexts/ThemeContext';
 import AuthModal from '@/components/AuthModal';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 interface NavItemProps {
   to: string;
@@ -16,10 +23,41 @@ interface NavItemProps {
   label: string;
   active: boolean;
   onClick: () => void;
+  hasSubmenu?: boolean;
+  children?: React.ReactNode;
 }
 
-const NavItem = ({ to, icon, label, active, onClick }: NavItemProps) => {
+const NavItem = ({ to, icon, label, active, onClick, hasSubmenu, children }: NavItemProps) => {
   const handleRipple = useRippleEffect();
+  
+  if (hasSubmenu) {
+    return (
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className={cn(
+              "relative flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300",
+              "hover:bg-primary/10", 
+              active ? "bg-primary/10 text-primary" : "text-foreground/80"
+            )}>
+              <span className={cn(
+                "transition-all duration-300",
+                active ? "text-primary" : "text-foreground/60"
+              )}>
+                {icon}
+              </span>
+              <span className="font-medium">{label}</span>
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <div className="grid w-[200px] gap-1 p-2">
+                {children}
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    );
+  }
   
   return (
     <Link 
@@ -49,8 +87,24 @@ const NavItem = ({ to, icon, label, active, onClick }: NavItemProps) => {
   );
 };
 
+const SubMenuItem = ({ to, icon, label, active, onClick }: NavItemProps) => {
+  return (
+    <Link 
+      to={to} 
+      className={cn(
+        "flex items-center gap-2 p-2 rounded-md hover:bg-accent",
+        active ? "bg-accent/50" : ""
+      )}
+      onClick={onClick}
+    >
+      <span className="text-foreground/60">{icon}</span>
+      <span>{label}</span>
+    </Link>
+  );
+};
+
 export const Navbar = () => {
-  const [active, setActive] = useState('home');
+  const [active, setActive] = useState('what');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { isAuthenticated, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
@@ -63,8 +117,14 @@ export const Navbar = () => {
     setIsAuthModalOpen(false);
   };
 
-  const baseNavItems = [
-    { to: '/', icon: <Brain size={20} />, label: 'Cortex', id: 'home' },
+  const handleNavItemClick = (id: string) => {
+    setActive(id);
+  };
+
+  const cortexSubmenu = [
+    { to: '/', icon: <Info size={18} />, label: 'What', id: 'what' },
+    { to: '/why', icon: <HelpCircle size={18} />, label: 'Why', id: 'why' },
+    { to: '/how', icon: <Code size={18} />, label: 'How', id: 'how' },
   ];
   
   const authNavItems = [
@@ -75,14 +135,34 @@ export const Navbar = () => {
     { to: '/settings', icon: <Settings size={20} />, label: 'Settings', id: 'settings' },
   ];
 
-  const navItems = isAuthenticated 
-    ? [...baseNavItems, ...authNavItems]
-    : baseNavItems;
+  const navItems = isAuthenticated ? authNavItems : [];
 
   return (
     <>
       <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-full px-1 py-1">
         <nav className="flex items-center">
+          {/* Cortex with submenu */}
+          <NavItem
+            to="#"
+            icon={<Brain size={20} />}
+            label="Cortex"
+            active={['what', 'why', 'how'].includes(active)}
+            onClick={() => {}}
+            hasSubmenu={true}
+          >
+            {cortexSubmenu.map((item) => (
+              <SubMenuItem
+                key={item.id}
+                to={item.to}
+                icon={item.icon}
+                label={item.label}
+                active={active === item.id}
+                onClick={() => handleNavItemClick(item.id)}
+              />
+            ))}
+          </NavItem>
+          
+          {/* Other nav items */}
           {navItems.map((item) => (
             <NavItem
               key={item.id}
@@ -90,7 +170,7 @@ export const Navbar = () => {
               icon={item.icon}
               label={item.label}
               active={active === item.id}
-              onClick={() => setActive(item.id)}
+              onClick={() => handleNavItemClick(item.id)}
             />
           ))}
           
