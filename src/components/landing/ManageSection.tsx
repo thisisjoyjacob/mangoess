@@ -59,9 +59,7 @@ export const ManageSection = ({
       <div className="py-16 md:py-24">
         <div className="flex flex-col items-start gap-2 mb-12">
           <h2 className="text-4xl font-bold text-primary md:text-8xl">Manage</h2>
-          <p className="text-foreground max-w-3xl text-xl md:text-2xl mt-2 whitespace-nowrap">
-            Build & maintain a scalable personal AI engine.
-          </p>
+          <p className="text-foreground max-w-3xl text-xl md:text-2xl mt-2 whitespace-nowrap">The first and only extension for your real mind.</p>
         </div>
 
         <div className="mb-12 border border-border/50 rounded-lg overflow-hidden shadow-lg">
