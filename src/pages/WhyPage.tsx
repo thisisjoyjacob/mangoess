@@ -61,11 +61,11 @@ const WhyPage = () => {
             Everything we do starts with this question.
           </p>
           
-          <div className="mt-8 glass-panel p-6 rounded-lg max-w-3xl">
-            <p className="text-lg text-foreground/90">
+          <div className="mt-10 glass-panel p-8 md:p-10 rounded-lg max-w-3xl mx-auto shadow-lg border-2 border-primary/20">
+            <p className="text-xl md:text-2xl text-foreground/90">
               Why should Cortex exist? Why should anyone care to use it? Why is privacy so important to us?
             </p>
-            <p className="text-lg text-foreground/90 mt-4">
+            <p className="text-xl md:text-2xl text-foreground/90 mt-6">
               Eventually, the "why" led us here.
             </p>
           </div>
