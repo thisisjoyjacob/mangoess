@@ -1,7 +1,7 @@
-
 import { Button } from '@/components/ui/button';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { useState, useEffect } from 'react';
+import { Card } from '@/components/ui/card';
 
 interface DesignSectionProps {
   show: boolean;
@@ -102,7 +102,7 @@ export const DesignSection = ({
           duration={500}
           className="text-center mb-8"
         >
-          <h3 className="text-2xl font-bold text-black">
+          <h3 className="text-2xl font-bold text-primary">
             {templateCategories[category].title}
           </h3>
         </AnimatedTransition>
@@ -113,14 +113,19 @@ export const DesignSection = ({
             animation="fade" 
             duration={500}
           >
-            <div className="flex flex-wrap gap-3 justify-center mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {currentTemplates.map((template, idx) => (
-                <button
+                <Card 
                   key={idx}
-                  className="bg-[#1EAEDB] hover:bg-[#33C3F0] text-white px-5 py-2 rounded-md text-sm font-medium transition-colors duration-300 cursor-pointer"
+                  className="group overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer"
                 >
-                  {template}
-                </button>
+                  <div className="relative h-40 bg-gradient-to-br from-primary/5 to-primary/20 p-6 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors duration-300"></div>
+                    <span className="font-medium text-lg text-center z-10 group-hover:scale-105 transition-transform duration-300">
+                      {template}
+                    </span>
+                  </div>
+                </Card>
               ))}
             </div>
           </AnimatedTransition>
