@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Plus, Brain } from 'lucide-react';
 
 interface UseCasesSectionProps {
   show: boolean;
@@ -168,11 +167,7 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
                     <div className="text-white">▶</div>
                   </div>
                   <div className="relative max-w-md mx-auto bg-white p-6 rounded-lg shadow-sm">
-                    <img 
-                      src="/lovable-uploads/c8bb4107-045f-4395-b2c0-30333ba564b7.png" 
-                      alt="Brain illustration" 
-                      className="max-w-full"
-                    />
+                    <Brain className="max-w-full h-auto w-64 mx-auto text-primary" />
                     <div className="absolute right-12 top-12 bg-white px-4 py-2 rounded-full text-red-500 font-medium shadow-sm flex items-center">
                       <span className="size-3 bg-red-500 rounded-full mr-2"></span>
                       Cognitive Functions
