@@ -1,3 +1,4 @@
+
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { Card } from '@/components/ui/card';
 interface TestimonialsSectionProps {
@@ -64,7 +65,7 @@ export const TestimonialsSection = ({
           <h2 className="text-4xl font-bold text-primary md:text-7xl">
             What our users are saying
           </h2>
-          <p className="text-foreground max-w-xl text-xl md:text-2xl mt-2">
+          <p className="text-foreground max-w-3xl text-xl md:text-2xl mt-2 whitespace-nowrap">
             Discover how our platform transforms the way people work
           </p>
         </div>

@@ -1,3 +1,4 @@
+
 import { Activity, TrendingUp, Layout, Maximize } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 interface DeploySectionProps {
@@ -27,7 +28,7 @@ export const DeploySection = ({
       <div className="py-16 md:py-24">
         <div className="flex flex-col items-start gap-2 mb-12">
           <h2 className="text-4xl font-bold text-primary md:text-8xl">Deploy</h2>
-          <p className="text-foreground max-w-xl text-xl md:text-3xl mt-2">
+          <p className="text-foreground max-w-3xl text-xl md:text-2xl mt-2 whitespace-nowrap">
             Take your AI-driven work to the next level.
           </p>
         </div>
