@@ -2,16 +2,14 @@ import { useState } from 'react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { Button } from '@/components/ui/button';
 import { Plus, Brain } from 'lucide-react';
-
 interface UseCasesSectionProps {
   show: boolean;
 }
-
 type UserType = 'Marketers' | 'Designers' | 'Writers' | 'Researchers' | 'Developers' | 'Everyone';
-
-const UseCasesSection = ({ show }: UseCasesSectionProps) => {
+const UseCasesSection = ({
+  show
+}: UseCasesSectionProps) => {
   const [activeUserType, setActiveUserType] = useState<UserType>('Marketers');
-
   const userCases = {
     Marketers: {
       title: 'Save and find quotes & highlights',
@@ -20,7 +18,7 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
       quote: "True change is within.",
       background: 'bg-[#ff4d3c]',
       textColor: 'text-white',
-      ctaText: 'SAVE TO MY MIND',
+      ctaText: 'SAVE TO MY MIND'
     },
     Designers: {
       title: 'Create instant, boundless',
@@ -47,7 +45,7 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
       subtitle: 'references in one place.',
       description: '',
       quote: '',
-      background: 'bg-[#e8f4f8]', 
+      background: 'bg-[#e8f4f8]',
       textColor: 'text-black',
       ctaText: '',
       showBrain: true
@@ -73,11 +71,8 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
       showTags: true
     }
   };
-
   const currentCase = userCases[activeUserType];
-
-  return (
-    <AnimatedTransition show={show} animation="slide-up" duration={600}>
+  return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-4 mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-16">
@@ -85,18 +80,10 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
           </h2>
           
           <div className="flex justify-center space-x-8 mb-10">
-            {Object.keys(userCases).map((type) => (
-              <button
-                key={type}
-                className={`relative pb-1 ${activeUserType === type ? 'text-primary font-medium' : 'text-muted-foreground hover:text-foreground transition-colors'}`}
-                onClick={() => setActiveUserType(type as UserType)}
-              >
+            {Object.keys(userCases).map(type => <button key={type} className={`relative pb-1 ${activeUserType === type ? 'text-primary font-medium' : 'text-muted-foreground hover:text-foreground transition-colors'}`} onClick={() => setActiveUserType(type as UserType)}>
                 {type}
-                {activeUserType === type && (
-                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />
-                )}
-              </button>
-            ))}
+                {activeUserType === type && <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />}
+              </button>)}
           </div>
           
           <div className={`rounded-xl overflow-hidden transition-all duration-500 ${currentCase.background} ${currentCase.textColor}`}>
@@ -109,8 +96,7 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
                 </h3>
               </div>
               
-              {activeUserType === 'Marketers' && (
-                <div className="max-w-3xl mx-auto my-12">
+              {activeUserType === 'Marketers' && <div className="max-w-3xl mx-auto my-12">
                   <p className="text-lg mb-8">{currentCase.description}</p>
                   <div className="bg-yellow-200 text-black p-6 rounded mb-8 max-w-md mx-auto">
                     <p className="text-4xl italic font-light">"{currentCase.quote}"</p>
@@ -121,43 +107,25 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
                       {currentCase.ctaText}
                     </Button>
                   </div>
-                </div>
-              )}
+                </div>}
               
-              {activeUserType === 'Designers' && (
-                <div className="max-w-5xl mx-auto my-10">
+              {activeUserType === 'Designers' && <div className="max-w-5xl mx-auto my-10">
                   <div className="relative p-4 md:p-8 bg-[#d8ede7]/60 rounded-xl">
                     <div className="flex gap-4 mb-4">
                       <div className="w-1/3 aspect-[4/5] bg-white rounded-lg shadow-md overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                        <img 
-                          src="/lovable-uploads/5c0593c5-5471-45ee-a093-349209e3b4f5.png" 
-                          alt="Inspiration" 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src="/lovable-uploads/5c0593c5-5471-45ee-a093-349209e3b4f5.png" alt="Inspiration" className="w-full h-full object-cover" />
                       </div>
                       <div className="w-2/3 aspect-[3/2] bg-white rounded-lg shadow-md overflow-hidden transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-                        <img 
-                          src="/lovable-uploads/fdcdb8ad-4473-4fcb-981f-b6697318306a.png" 
-                          alt="Design" 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src="/lovable-uploads/fdcdb8ad-4473-4fcb-981f-b6697318306a.png" alt="Design" className="w-full h-full object-cover" />
                       </div>
                     </div>
                     
                     <div className="flex gap-4 relative">
                       <div className="w-1/2 aspect-[3/2] bg-white rounded-lg shadow-md overflow-hidden transform translate-y-0 hover:-translate-y-1 transition-transform duration-300">
-                        <img 
-                          src="/lovable-uploads/dbe4697c-1ebb-4e1c-adf1-75bffdf12d36.png" 
-                          alt="Concept" 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src="/lovable-uploads/dbe4697c-1ebb-4e1c-adf1-75bffdf12d36.png" alt="Concept" className="w-full h-full object-cover" />
                       </div>
                       <div className="w-1/4 aspect-square bg-white rounded-lg shadow-md overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                        <img 
-                          src="/lovable-uploads/e1444c90-aa39-471b-bb58-8958fd86426f.png" 
-                          alt="Color palette" 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src="/lovable-uploads/e1444c90-aa39-471b-bb58-8958fd86426f.png" alt="Color palette" className="w-full h-full object-cover" />
                       </div>
                       <div className="w-1/4 bg-white rounded-lg p-4 shadow-md">
                         <p className="text-black font-medium text-lg mb-2">Color inspiration</p>
@@ -179,11 +147,9 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
                       <span className="text-xs text-black font-medium">Interior mood</span>
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
               
-              {activeUserType === 'Writers' && (
-                <div className="max-w-md mx-auto my-12 bg-white rounded-lg p-6 shadow-sm">
+              {activeUserType === 'Writers' && <div className="max-w-md mx-auto my-12 bg-white rounded-lg p-6 shadow-sm">
                   <p className="text-primary uppercase font-medium text-sm mb-4">{currentCase.ctaText}</p>
                   <p className="text-xl font-medium mb-4 text-black">Promote our new campaign</p>
                   <div className="space-y-3">
@@ -206,14 +172,10 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
                       <p className="ml-3 text-gray-400">Write drafts for blog post</p>
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
               
-              {activeUserType === 'Researchers' && (
-                <div className="flex flex-col items-center justify-center my-12">
-                  <div className="size-16 rounded-full bg-black flex items-center justify-center mb-10">
-                    <div className="text-white">▶</div>
-                  </div>
+              {activeUserType === 'Researchers' && <div className="flex flex-col items-center justify-center my-12">
+                  
                   <div className="relative max-w-md mx-auto bg-white p-6 rounded-lg shadow-sm">
                     <Brain className="max-w-full h-auto w-64 mx-auto text-primary" />
                     <div className="absolute right-12 top-12 bg-white px-4 py-2 rounded-full text-red-500 font-medium shadow-sm flex items-center">
@@ -221,11 +183,9 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
                       Cognitive Functions
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
               
-              {activeUserType === 'Developers' && (
-                <div className="max-w-3xl mx-auto my-12">
+              {activeUserType === 'Developers' && <div className="max-w-3xl mx-auto my-12">
                   <div className="bg-[#121416] text-gray-300 rounded-lg p-4 mt-4">
                     <div className="flex items-center border-b border-gray-700 pb-3 mb-3">
                       <div className="text-gray-400 italic flex-1">Search my mind...</div>
@@ -248,11 +208,9 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
                       </div>
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
               
-              {activeUserType === 'Everyone' && (
-                <div className="flex justify-center my-12">
+              {activeUserType === 'Everyone' && <div className="flex justify-center my-12">
                   <div className="flex flex-wrap gap-8 max-w-3xl">
                     <div className="bg-white px-4 py-2 rounded-full shadow-sm text-gray-700">
                       #readlater
@@ -263,14 +221,11 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
                     </div>
                     <div className="w-64 h-64 bg-[url('/lovable-uploads/e1444c90-aa39-471b-bb58-8958fd86426f.png')] bg-cover bg-center rounded-xl shadow-md"></div>
                   </div>
-                </div>
-              )}
+                </div>}
             </div>
           </div>
         </div>
       </div>
-    </AnimatedTransition>
-  );
+    </AnimatedTransition>;
 };
-
 export default UseCasesSection;
