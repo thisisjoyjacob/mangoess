@@ -55,7 +55,6 @@ export const ManageSection = ({
     title: "D/L mode",
     description: "Toggle between dark and simplified interface with custom color modes for focus."
   }];
-  
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
         <div className="flex flex-col items-start gap-2 mb-12">
@@ -66,7 +65,7 @@ export const ManageSection = ({
         </div>
 
         <div className="mb-12 border border-border/50 rounded-lg overflow-hidden shadow-lg">
-          <img alt="Dashboard visualization" className="w-full h-auto" src="/lovable-uploads/daaf4041-7ba0-4623-a56d-9e7347f7572e.png" />
+          
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
