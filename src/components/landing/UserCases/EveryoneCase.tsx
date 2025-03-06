@@ -31,7 +31,7 @@ const EveryoneCase = ({ data, books }: EveryoneProps) => {
           
           <div className="relative">
             {/* Book display */}
-            <div className={`h-[300px] w-[200px] ${books[activeBookIndex].coverColor} ${books[activeBookIndex].textColor} rounded-md shadow-lg flex flex-col relative overflow-hidden`}>
+            <div className={`h-[300px] w-[200px] ${books[activeBookIndex].coverColor} text-white rounded-md shadow-lg flex flex-col relative overflow-hidden`}>
               {/* Book spine effect */}
               <div className="absolute left-0 top-0 h-full w-[10px] bg-black/20"></div>
               

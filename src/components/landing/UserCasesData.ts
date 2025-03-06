@@ -17,7 +17,7 @@ export const userCasesData: UserCasesData = {
     description: '',
     quote: '',
     background: 'bg-[#d8ede7]',
-    textColor: 'text-black',
+    textColor: 'text-white',
     ctaText: '',
     showImageGrid: true
   },
@@ -27,7 +27,7 @@ export const userCasesData: UserCasesData = {
     description: '',
     quote: '',
     background: 'bg-[#f7c2d2]',
-    textColor: 'text-black',
+    textColor: 'text-white',
     ctaText: 'ADD NEW NOTE',
     showNotepad: true
   },
@@ -37,7 +37,7 @@ export const userCasesData: UserCasesData = {
     description: '',
     quote: '',
     background: 'bg-[#e8f4f8]',
-    textColor: 'text-black',
+    textColor: 'text-white',
     ctaText: '',
     showBrain: true
   },
@@ -57,7 +57,7 @@ export const userCasesData: UserCasesData = {
     description: '',
     quote: '',
     background: 'bg-[#e8ecf0]',
-    textColor: 'text-black',
+    textColor: 'text-white',
     ctaText: '',
     showTags: true
   }

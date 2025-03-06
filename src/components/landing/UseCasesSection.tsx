@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { cn } from '@/lib/utils';
@@ -11,14 +12,17 @@ import WritersCase from './UserCases/WritersCase';
 import ResearchersCase from './UserCases/ResearchersCase';
 import DevelopersCase from './UserCases/DevelopersCase';
 import EveryoneCase from './UserCases/EveryoneCase';
+
 interface UseCasesSectionProps {
   show: boolean;
 }
+
 const UseCasesSection = ({
   show
 }: UseCasesSectionProps) => {
   const [activeUserType, setActiveUserType] = useState<UserType>('Marketers');
   const currentCase = userCasesData[activeUserType];
+  
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-4 mb-16">
@@ -33,11 +37,11 @@ const UseCasesSection = ({
               </button>)}
           </div>
           
-          <div className={cn("rounded-xl overflow-hidden transition-all duration-500", currentCase.background, currentCase.textColor)}>
-            <div className="p-10 md:p-16 bg-blue-400">
+          <div className={cn("rounded-xl overflow-hidden transition-all duration-500", currentCase.background)}>
+            <div className="p-10 md:p-16">
               <div className="text-center mb-4">
-                <p className="uppercase tracking-wide text-sm font-medium mb-6">Made for {activeUserType}</p>
-                <h3 className="text-4xl md:text-5xl font-medium mb-2">
+                <p className="uppercase tracking-wide text-sm font-medium mb-6 text-white">Made for {activeUserType}</p>
+                <h3 className="text-4xl md:text-5xl font-medium mb-2 text-white">
                   {currentCase.title} 
                   <span className="block italic font-light">{currentCase.subtitle}</span>
                 </h3>
@@ -56,4 +60,5 @@ const UseCasesSection = ({
       </div>
     </AnimatedTransition>;
 };
+
 export default UseCasesSection;
