@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { Button } from '@/components/ui/button';
@@ -125,12 +126,46 @@ const UseCasesSection = ({ show }: UseCasesSectionProps) => {
               )}
               
               {activeUserType === 'Designers' && (
-                <div className="grid grid-cols-3 gap-4 my-10">
-                  <div className="col-span-1 aspect-square bg-[url('/lovable-uploads/e9b4097a-d906-451f-8476-e60aa00e3b44.png')] bg-cover rounded-lg"></div>
-                  <div className="col-span-2 aspect-video bg-[url('/lovable-uploads/fdcdb8ad-4473-4fcb-981f-b6697318306a.png')] bg-cover rounded-lg"></div>
-                  <div className="col-span-1 aspect-square bg-[url('/lovable-uploads/dbe4697c-1ebb-4e1c-adf1-75bffdf12d36.png')] bg-cover rounded-lg"></div>
-                  <div className="col-span-1 aspect-square bg-[url('/lovable-uploads/e1444c90-aa39-471b-bb58-8958fd86426f.png')] bg-cover rounded-lg"></div>
-                  <div className="col-span-1 aspect-square bg-[url('/lovable-uploads/7704384c-5fe5-46ba-8c72-ca477b964153.png')] bg-cover rounded-lg"></div>
+                <div className="max-w-5xl mx-auto my-10">
+                  <div className="grid grid-cols-12 gap-3 relative">
+                    {/* Main mood board images with different sizes and overlaps */}
+                    <div className="col-span-4 row-span-2 rounded-lg overflow-hidden shadow-lg transform rotate-1 hover:rotate-0 transition-transform">
+                      <img src="/lovable-uploads/e9b4097a-d906-451f-8476-e60aa00e3b44.png" alt="Inspiration" className="w-full h-full object-cover" />
+                    </div>
+                    
+                    <div className="col-span-8 rounded-lg overflow-hidden shadow-lg transform -rotate-1 hover:rotate-0 transition-transform">
+                      <img src="/lovable-uploads/fdcdb8ad-4473-4fcb-981f-b6697318306a.png" alt="Design" className="w-full h-full object-cover" />
+                    </div>
+                    
+                    <div className="col-span-5 rounded-lg overflow-hidden shadow-lg z-10 transform translate-y-4 hover:-translate-y-1 transition-transform">
+                      <img src="/lovable-uploads/dbe4697c-1ebb-4e1c-adf1-75bffdf12d36.png" alt="Concept" className="w-full h-full object-cover" />
+                    </div>
+                    
+                    <div className="col-span-3 rounded-lg overflow-hidden shadow-lg transform rotate-2 hover:rotate-0 transition-transform">
+                      <img src="/lovable-uploads/e1444c90-aa39-471b-bb58-8958fd86426f.png" alt="Color palette" className="w-full h-full object-cover" />
+                    </div>
+                    
+                    <div className="col-span-4 bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg p-4 shadow-lg transform -rotate-1 hover:rotate-0 transition-transform">
+                      <p className="text-black font-medium text-lg italic">Color inspiration</p>
+                      <div className="flex space-x-2 mt-3">
+                        <div className="size-8 rounded-full bg-[#FF9F7F]"></div>
+                        <div className="size-8 rounded-full bg-[#FFD7A8]"></div>
+                        <div className="size-8 rounded-full bg-[#E8F0F8]"></div>
+                        <div className="size-8 rounded-full bg-[#C6DCF6]"></div>
+                      </div>
+                    </div>
+                    
+                    {/* Floating note */}
+                    <div className="absolute -right-5 top-1/3 bg-white p-3 rounded-lg shadow-lg transform rotate-6 hover:rotate-0 transition-transform">
+                      <p className="text-sm text-black font-medium">Design system</p>
+                    </div>
+                    
+                    {/* Floating tag */}
+                    <div className="absolute left-1/4 -bottom-4 bg-white px-3 py-1 rounded-full shadow-md flex items-center">
+                      <span className="size-2 bg-blue-500 rounded-full mr-2"></span>
+                      <span className="text-xs text-black font-medium">Interior mood</span>
+                    </div>
+                  </div>
                 </div>
               )}
               
