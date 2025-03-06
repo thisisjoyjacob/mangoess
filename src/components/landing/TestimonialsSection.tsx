@@ -1,6 +1,6 @@
 
-import { useRef, useEffect } from 'react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
+import { Card } from '@/components/ui/card';
 
 interface TestimonialsSectionProps {
   showTestimonials: boolean;
@@ -70,38 +70,6 @@ export const TestimonialsSection = ({ showTestimonials }: TestimonialsSectionPro
     }
   ];
 
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current || !showTestimonials) return;
-
-    const scrollContainer = containerRef.current;
-    let animationId: number;
-    let startTime: number | null = null;
-    
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      
-      scrollContainer.scrollLeft += 0.5;
-      
-      // Reset scroll position when reaching the end to create an infinite loop effect
-      if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth - scrollContainer.clientWidth) / 2) {
-        scrollContainer.scrollLeft = 0;
-      }
-      
-      animationId = requestAnimationFrame(step);
-    };
-    
-    animationId = requestAnimationFrame(step);
-    
-    return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-    };
-  }, [showTestimonials]);
-
   return (
     <AnimatedTransition show={showTestimonials} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
@@ -109,24 +77,18 @@ export const TestimonialsSection = ({ showTestimonials }: TestimonialsSectionPro
           What our users are saying
         </h2>
         
-        <div 
-          ref={containerRef}
-          className="flex overflow-x-hidden whitespace-nowrap py-4 scrollbar-hidden"
-        >
-          {/* Double the testimonials to create seamless loop */}
-          {[...testimonials, ...testimonials].map((testimonial, index) => (
-            <div 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+          {testimonials.map((testimonial, index) => (
+            <Card 
               key={index} 
-              className="inline-block min-w-[300px] md:min-w-[400px] px-4 whitespace-normal"
+              className="bg-card border border-border/50 p-6 rounded-lg shadow-sm h-full"
             >
-              <div className="bg-card border border-border/50 p-6 rounded-lg shadow-sm h-full">
-                <p className="text-lg font-medium mb-4">{testimonial.quote}</p>
-                <div className="mt-4">
-                  <p className="font-bold">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
+              <p className="text-lg font-medium mb-4">{testimonial.quote}</p>
+              <div className="mt-4">
+                <p className="font-bold">{testimonial.name}</p>
+                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>
