@@ -8,6 +8,7 @@ import { DeploySection } from '@/components/landing/DeploySection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
 import { CallToAction } from '@/components/landing/CallToAction';
 import { LoadingScreen } from '@/components/landing/LoadingScreen';
+import UseCasesSection from '@/components/landing/UseCasesSection';
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -15,8 +16,9 @@ const Index = () => {
   const showManage = useAnimateIn(false, 600);
   const showDesign = useAnimateIn(false, 900);
   const showDeploy = useAnimateIn(false, 1200);
-  const showTestimonials = useAnimateIn(false, 1500);
-  const showCallToAction = useAnimateIn(false, 1800);
+  const showUseCases = useAnimateIn(false, 1500);
+  const showTestimonials = useAnimateIn(false, 1800);
+  const showCallToAction = useAnimateIn(false, 2100);
   
   useEffect(() => {
     // Simulate loading
@@ -51,6 +53,9 @@ const Index = () => {
           
           {/* Deploy Section */}
           <DeploySection show={showDeploy} />
+          
+          {/* Use Cases Section */}
+          <UseCasesSection show={showUseCases} />
           
           {/* Testimonials Section */}
           <TestimonialsSection showTestimonials={showTestimonials} />
