@@ -1,15 +1,54 @@
+
 import { useState } from 'react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { Button } from '@/components/ui/button';
-import { Plus, Brain } from 'lucide-react';
+import { Plus, Brain, Book, ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
+
 interface UseCasesSectionProps {
   show: boolean;
 }
 type UserType = 'Marketers' | 'Designers' | 'Writers' | 'Researchers' | 'Developers' | 'Everyone';
+
 const UseCasesSection = ({
   show
 }: UseCasesSectionProps) => {
   const [activeUserType, setActiveUserType] = useState<UserType>('Marketers');
+  const [activeBookIndex, setActiveBookIndex] = useState(0);
+  
+  // Books data for the Everyone section
+  const books = [
+    {
+      title: "The Creative Mind",
+      author: "Maria Johnson",
+      coverColor: "bg-[#f97316]",
+      textColor: "text-white",
+    },
+    {
+      title: "Design Patterns",
+      author: "Alex Thompson",
+      coverColor: "bg-[#8b5cf6]",
+      textColor: "text-white",
+    },
+    {
+      title: "The Art of Focus",
+      author: "Sarah Williams",
+      coverColor: "bg-[#0ea5e9]",
+      textColor: "text-white",
+    },
+    {
+      title: "Digital Minimalism",
+      author: "Cal Newport",
+      coverColor: "bg-[#d946ef]",
+      textColor: "text-white",
+    },
+    {
+      title: "Atomic Habits",
+      author: "James Clear",
+      coverColor: "bg-[#f97316]",
+      textColor: "text-white",
+    },
+  ];
+
   const userCases = {
     Marketers: {
       title: 'Save and find quotes & highlights',
@@ -71,7 +110,17 @@ const UseCasesSection = ({
       showTags: true
     }
   };
+  
   const currentCase = userCases[activeUserType];
+  
+  const nextBook = () => {
+    setActiveBookIndex((prev) => (prev + 1) % books.length);
+  };
+  
+  const prevBook = () => {
+    setActiveBookIndex((prev) => (prev - 1 + books.length) % books.length);
+  };
+  
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-4 mb-16">
@@ -211,15 +260,53 @@ const UseCasesSection = ({
                 </div>}
               
               {activeUserType === 'Everyone' && <div className="flex justify-center my-12">
-                  <div className="flex flex-wrap gap-8 max-w-3xl">
-                    <div className="bg-white px-4 py-2 rounded-full shadow-sm text-gray-700">
-                      #readlater
+                  <div className="flex flex-col items-center max-w-3xl">
+                    <div className="flex items-center gap-6 mb-8">
+                      <Button 
+                        variant="ghost" 
+                        className="rounded-full h-12 w-12 p-0 bg-white/20 backdrop-blur-sm hover:bg-white/30"
+                        onClick={prevBook}
+                      >
+                        <ChevronLeft className="h-6 w-6" />
+                      </Button>
+                      
+                      <div className="relative">
+                        {/* Book display */}
+                        <div className={`h-[300px] w-[200px] ${books[activeBookIndex].coverColor} ${books[activeBookIndex].textColor} rounded-md shadow-lg flex flex-col relative overflow-hidden`}>
+                          {/* Book spine effect */}
+                          <div className="absolute left-0 top-0 h-full w-[10px] bg-black/20"></div>
+                          
+                          {/* Book content */}
+                          <div className="flex-1 p-6 flex flex-col justify-between">
+                            <div>
+                              <BookOpen className="h-10 w-10 mb-4 opacity-80" />
+                              <h4 className="text-xl font-bold leading-tight mb-2">{books[activeBookIndex].title}</h4>
+                              <p className="text-sm opacity-90">by {books[activeBookIndex].author}</p>
+                            </div>
+                            
+                            <div className="mt-8">
+                              <p className="text-xs opacity-70">#readlater #inspiration</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Book shadow/reflection effect */}
+                        <div className={`h-[20px] w-[180px] mx-auto mt-[-5px] rounded-full bg-black/20 blur-md`}></div>
+                      </div>
+                      
+                      <Button 
+                        variant="ghost" 
+                        className="rounded-full h-12 w-12 p-0 bg-white/20 backdrop-blur-sm hover:bg-white/30"
+                        onClick={nextBook}
+                      >
+                        <ChevronRight className="h-6 w-6" />
+                      </Button>
                     </div>
-                    <div className="w-64 h-64 bg-[url('/lovable-uploads/e9b4097a-d906-451f-8476-e60aa00e3b44.png')] bg-cover bg-center rounded-xl shadow-md"></div>
-                    <div className="bg-white px-4 py-2 rounded-full shadow-sm text-gray-700">
-                      #apartmentdecor
-                    </div>
-                    <div className="w-64 h-64 bg-[url('/lovable-uploads/e1444c90-aa39-471b-bb58-8958fd86426f.png')] bg-cover bg-center rounded-xl shadow-md"></div>
+                    
+                    <Button className="mt-4 gap-2" size="lg">
+                      <Book className="h-4 w-4" />
+                      Add to my collection
+                    </Button>
                   </div>
                 </div>}
             </div>
