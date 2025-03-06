@@ -2,9 +2,11 @@ import { Button } from '@/components/ui/button';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
+
 interface DesignSectionProps {
   show: boolean;
 }
+
 export const DesignSection = ({
   show
 }: DesignSectionProps) => {
@@ -21,9 +23,11 @@ export const DesignSection = ({
     title: "Personal Growth",
     templates: ["Habit Tracker", "Goal Setting", "Learning Journal", "Reading List", "Travel Planner", "Fitness Tracker", "Productivity System", "Reflection Journal"]
   }];
+
   const [currentTemplates, setCurrentTemplates] = useState<string[]>([]);
   const [category, setCategory] = useState(0);
   const [animating, setAnimating] = useState(false);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setAnimating(true);
@@ -35,9 +39,11 @@ export const DesignSection = ({
     }, 5000);
     return () => clearInterval(timer);
   }, [category]);
+
   useEffect(() => {
     setCurrentTemplates(templateCategories[0].templates.sort(() => Math.random() - 0.5).slice(0, 8));
   }, []);
+
   const changeCategory = (index: number) => {
     if (category === index || animating) return;
     setAnimating(true);
@@ -47,11 +53,12 @@ export const DesignSection = ({
       setAnimating(false);
     }, 500);
   };
+
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
-        <div className="flex flex-col items-start gap-2 mb-12">
+        <div className="flex flex-col items-center text-center gap-2 mb-12">
           <h2 className="text-4xl font-bold text-primary md:text-8xl">Design</h2>
-          <p className="text-foreground max-w-3xl text-xl md:text-2xl mt-2 whitespace-nowrap">Choose from over 200+ ready-to-use templates tailored to your needs.</p>
+          <p className="text-foreground max-w-3xl text-xl md:text-2xl mt-2">Choose from over 200+ ready-to-use templates tailored to your needs.</p>
         </div>
 
         <div className="flex justify-center space-x-2 mb-12">
