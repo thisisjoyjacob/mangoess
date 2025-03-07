@@ -1,12 +1,17 @@
-
+import { useState } from 'react';
 import { Plus, Puzzle, BrainCircuit, Brain, Sparkles, Paperclip, Monitor, Search, Lock, ScanSearch, Share, Sun } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
+import { FeatureIllustration } from './FeatureIllustration';
+
 interface ManageSectionProps {
   show: boolean;
 }
+
 export const ManageSection = ({
   show
 }: ManageSectionProps) => {
+  const [activeFeature, setActiveFeature] = useState<number | null>(null);
+  
   const features = [{
     icon: <Plus size={32} className="text-primary" />,
     title: "Add Cells",
@@ -56,6 +61,11 @@ export const ManageSection = ({
     title: "D/L mode",
     description: "Toggle between dark and simplified interface with custom color modes for focus."
   }];
+
+  const handleFeatureClick = (index: number) => {
+    setActiveFeature(index === activeFeature ? null : index);
+  };
+
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
         <div className="flex flex-col items-center text-center gap-2 mb-12">
@@ -63,18 +73,25 @@ export const ManageSection = ({
           <p className="text-foreground max-w-3xl text-xl md:text-2xl mt-2">The first and only extension for your real mind.</p>
         </div>
 
-        <div className="mb-12 border border-border/50 rounded-lg overflow-hidden shadow-lg">
-          
-        </div>
+        <FeatureIllustration 
+          featureIndex={activeFeature} 
+          className="transition-all duration-500"
+        />
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          {features.map((feature, index) => <div key={index} className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+          {features.map((feature, index) => (
+            <div 
+              key={index} 
+              className={`flex flex-col items-center text-center transition-all duration-300 ${activeFeature === index ? 'scale-105' : 'hover:scale-102'} cursor-pointer`}
+              onClick={() => handleFeatureClick(index)}
+            >
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-all duration-300 ${activeFeature === index ? 'bg-primary/20 ring-2 ring-primary/50' : 'bg-primary/10'}`}>
                 {feature.icon}
               </div>
               <h3 className="font-bold mb-2">{feature.title}</h3>
               <p className="text-sm text-muted-foreground">{feature.description}</p>
-            </div>)}
+            </div>
+          ))}
         </div>
       </div>
     </AnimatedTransition>;
