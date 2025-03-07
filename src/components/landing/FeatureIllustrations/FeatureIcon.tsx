@@ -19,18 +19,18 @@ export const FeatureIcon: React.FC<FeatureIconProps> = ({
   className 
 }) => {
   const icons = [
-    <Plus size={size} strokeWidth={1.5} />,             // Add Cells
-    <Puzzle size={size} strokeWidth={1.5} />,           // Plug & Play
-    <BrainCircuit size={size} strokeWidth={1.5} />,     // Spatial Thinking
-    <Brain size={size} strokeWidth={1.5} />,            // Contextual
-    <Sparkles size={size} strokeWidth={1.5} />,         // Intelligence
-    <Paperclip size={size} strokeWidth={1.5} />,        // Clip
-    <Monitor size={size} strokeWidth={1.5} />,          // Agnostic
-    <Search size={size} strokeWidth={1.5} />,           // Search
-    <Lock size={size} strokeWidth={1.5} />,             // Private
-    <ScanSearch size={size} strokeWidth={1.5} />,       // Recognition
-    <Share size={size} strokeWidth={1.5} />,            // Share
-    <Sun size={size} strokeWidth={1.5} />               // D/L mode
+    <Plus key="plus" size={size} strokeWidth={1.5} />,             // Add Cells
+    <Puzzle key="puzzle" size={size} strokeWidth={1.5} />,           // Plug & Play
+    <BrainCircuit key="brain-circuit" size={size} strokeWidth={1.5} />,     // Spatial Thinking
+    <Brain key="brain" size={size} strokeWidth={1.5} />,            // Contextual
+    <Sparkles key="sparkles" size={size} strokeWidth={1.5} />,         // Intelligence
+    <Paperclip key="paperclip" size={size} strokeWidth={1.5} />,        // Clip
+    <Monitor key="monitor" size={size} strokeWidth={1.5} />,          // Agnostic
+    <Search key="search" size={size} strokeWidth={1.5} />,           // Search
+    <Lock key="lock" size={size} strokeWidth={1.5} />,             // Private
+    <ScanSearch key="scansearch" size={size} strokeWidth={1.5} />,       // Recognition
+    <Share key="share" size={size} strokeWidth={1.5} />,            // Share
+    <Sun key="sun" size={size} strokeWidth={1.5} />               // D/L mode
   ];
 
   return (

@@ -14,7 +14,7 @@ export const FeatureIllustration: React.FC<FeatureIllustrationProps> = ({ featur
     <AnimatedTransition 
       show={featureIndex !== null} 
       animation="scale" 
-      duration={300}
+      duration={500}
       className={cn("w-full mb-12", className)}
     >
       {featureIndex !== null && (

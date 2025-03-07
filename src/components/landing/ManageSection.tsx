@@ -1,7 +1,8 @@
+
 import { useState } from 'react';
-import { Plus, Puzzle, BrainCircuit, Brain, Sparkles, Paperclip, Monitor, Search, Lock, ScanSearch, Share, Sun } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { FeatureIllustration } from './FeatureIllustration';
+import { FeatureIcon } from './FeatureIllustrations/FeatureIcon';
 
 interface ManageSectionProps {
   show: boolean;
@@ -12,55 +13,20 @@ export const ManageSection = ({
 }: ManageSectionProps) => {
   const [activeFeature, setActiveFeature] = useState<number | null>(null);
   
-  const features = [{
-    icon: <Plus size={32} className="text-primary" />,
-    title: "Add Cells",
-    description: "Seamlessly import data (CSV, HTML, AI scraping, or clipping) or create new entries effortlessly."
-  }, {
-    icon: <Puzzle size={32} className="text-primary" />,
-    title: "Plug & Play",
-    description: "Fully customizable with an open-source framework that adapts to your workflow."
-  }, {
-    icon: <BrainCircuit size={32} className="text-primary" />,
-    title: "Spatial Thinking",
-    description: "Visualize ideas with brain cells, lists, galleries, tables, maps, or timelines."
-  }, {
-    icon: <Brain size={32} className="text-primary" />,
-    title: "Contextual",
-    description: "Say goodbye to folders—create sub-brains tailored to specific projects or tasks."
-  }, {
-    icon: <Sparkles size={32} className="text-primary" />,
-    title: "Intelligence",
-    description: "AI-powered insights that extract what they mention from every pinned topic."
-  }, {
-    icon: <Paperclip size={32} className="text-primary" />,
-    title: "Clip",
-    description: "Collect data from any source or device directly into your second brain."
-  }, {
-    icon: <Monitor size={32} className="text-primary" />,
-    title: "Agnostic",
-    description: "Clip any type of content with built-in extraction tools."
-  }, {
-    icon: <Search size={32} className="text-primary" />,
-    title: "Search",
-    description: "Find what you're looking for with intelligent, precision-focused search capabilities."
-  }, {
-    icon: <Lock size={32} className="text-primary" />,
-    title: "Private",
-    description: "Keep all your work secure in a private, controlled space."
-  }, {
-    icon: <ScanSearch size={32} className="text-primary" />,
-    title: "Recognition",
-    description: "Identify and extract text from images, videos, and more."
-  }, {
-    icon: <Share size={32} className="text-primary" />,
-    title: "Share",
-    description: "Share thoughts and ideas to collaborate seamlessly."
-  }, {
-    icon: <Sun size={32} className="text-primary" />,
-    title: "D/L mode",
-    description: "Toggle between dark and simplified interface with custom color modes for focus."
-  }];
+  const features = [
+    { title: "Add Cells", description: "Seamlessly import data (CSV, HTML, AI scraping, or clipping) or create new entries effortlessly." },
+    { title: "Plug & Play", description: "Fully customizable with an open-source framework that adapts to your workflow." },
+    { title: "Spatial Thinking", description: "Visualize ideas with brain cells, lists, galleries, tables, maps, or timelines." },
+    { title: "Contextual", description: "Say goodbye to folders—create sub-brains tailored to specific projects or tasks." },
+    { title: "Intelligence", description: "AI-powered insights that extract what they mention from every pinned topic." },
+    { title: "Clip", description: "Collect data from any source or device directly into your second brain." },
+    { title: "Agnostic", description: "Clip any type of content with built-in extraction tools." },
+    { title: "Search", description: "Find what you're looking for with intelligent, precision-focused search capabilities." },
+    { title: "Private", description: "Keep all your work secure in a private, controlled space." },
+    { title: "Recognition", description: "Identify and extract text from images, videos, and more." },
+    { title: "Share", description: "Share thoughts and ideas to collaborate seamlessly." },
+    { title: "D/L mode", description: "Toggle between dark and simplified interface with custom color modes for focus." }
+  ];
 
   const handleFeatureClick = (index: number) => {
     setActiveFeature(index === activeFeature ? null : index);
@@ -86,7 +52,7 @@ export const ManageSection = ({
               onClick={() => handleFeatureClick(index)}
             >
               <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-all duration-300 ${activeFeature === index ? 'bg-primary/20 ring-2 ring-primary/50' : 'bg-primary/10'}`}>
-                {feature.icon}
+                <FeatureIcon index={index} size={32} />
               </div>
               <h3 className="font-bold mb-2">{feature.title}</h3>
               <p className="text-sm text-muted-foreground">{feature.description}</p>
