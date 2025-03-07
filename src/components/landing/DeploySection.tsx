@@ -1,11 +1,8 @@
-
 import { Activity, TrendingUp, Layout, Maximize } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
-
 interface DeploySectionProps {
   show: boolean;
 }
-
 export const DeploySection = ({
   show
 }: DeploySectionProps) => {
@@ -26,11 +23,10 @@ export const DeploySection = ({
     title: "Scale",
     description: "Adapt and grow your AI solutions as your needs evolve."
   }];
-
   return <AnimatedTransition show={show} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
         <div className="flex flex-col items-center text-center gap-2 mb-12">
-          <h2 className="text-4xl font-bold text-primary md:text-8xl">Deploy</h2>
+          <h2 className="text-4xl font-bold text-blue-600 md:text-8xl">Deploy</h2>
           <p className="text-foreground max-w-3xl text-xl md:text-2xl mt-2">
             Take your AI-driven work to the next level.
           </p>
