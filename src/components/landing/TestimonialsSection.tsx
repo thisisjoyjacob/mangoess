@@ -82,7 +82,7 @@ export const TestimonialsSection = ({
   return <AnimatedTransition show={showTestimonials} animation="slide-up" duration={600}>
       <div className="py-16 md:py-24">
         <div className="flex flex-col items-center gap-2 mb-12 text-center">
-          <h2 className="text-4xl font-bold text-primary md:text-7xl">
+          <h2 className="text-4xl font-bold text-blue-600 md:text-8xl">
             Trusted by thinkers<br />
             & doers everywhere.
           </h2>
