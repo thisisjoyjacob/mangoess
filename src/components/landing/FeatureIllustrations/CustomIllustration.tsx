@@ -2,7 +2,7 @@
 import React from 'react';
 import { FeatureIcon } from './FeatureIcon';
 import { cn } from '@/lib/utils';
-import { Brain, FileImport, Puzzle, Share, Users, Layers, ArrowRight, FileText, Database } from 'lucide-react';
+import { Brain, FileUp, Puzzle, Share, Users, Layers, ArrowRight, FileText, Database, Search } from 'lucide-react';
 
 interface CustomIllustrationProps {
   featureIndex: number;
@@ -77,7 +77,7 @@ export const CustomIllustration: React.FC<CustomIllustrationProps> = ({
               <span className="text-xs">Data</span>
             </div>
             <div className="absolute right-10 top-1/3 flex flex-col items-center">
-              <FileImport className="text-primary w-12 h-12 mb-2" />
+              <FileUp className="text-primary w-12 h-12 mb-2" />
               <span className="text-xs">Imports</span>
             </div>
             <ArrowRight className="absolute left-28 top-1/2 transform -translate-y-1/2 text-primary w-8 h-8" />
