@@ -16,11 +16,13 @@ import {
 type CortexItem = {
   id: string;
   title: string;
-  link: string;
+  url: string;
   type: string;
+  createdDate: string;
   source: string;
   keywords: string[];
   pitch: string;
+  writer: string;
 };
 
 interface CortexTableProps {
@@ -34,57 +36,69 @@ const CortexTable = ({ viewType = 'table' }: CortexTableProps) => {
     {
       id: '1',
       title: 'Neural networks fundamentals',
-      link: '/cortex/neural-networks',
+      url: '/cortex/neural-networks',
       type: 'Article',
+      createdDate: '2023-04-15',
       source: 'Research Paper',
       keywords: ['AI', 'Machine Learning', 'Deep Learning'],
-      pitch: 'Foundational knowledge on neural networks'
+      pitch: 'Foundational knowledge on neural networks',
+      writer: 'Alex Johnson'
     },
     {
       id: '2',
       title: 'Cloud architecture patterns',
-      link: '/cortex/cloud-patterns',
+      url: '/cortex/cloud-patterns',
       type: 'Guide',
+      createdDate: '2023-05-22',
       source: 'Internal Knowledge',
       keywords: ['Cloud', 'Architecture', 'Patterns'],
-      pitch: 'Best practices for cloud systems'
+      pitch: 'Best practices for cloud systems',
+      writer: 'Sarah Miller'
     },
     {
       id: '3',
       title: 'UX research methods',
-      link: '/cortex/ux-research',
+      url: '/cortex/ux-research',
       type: 'Collection',
+      createdDate: '2023-06-10',
       source: 'External Website',
       keywords: ['UX', 'Research', 'Design'],
-      pitch: 'Comprehensive guide to UX research'
+      pitch: 'Comprehensive guide to UX research',
+      writer: 'David Chen'
     },
     {
       id: '4',
       title: 'Product strategy',
-      link: '/cortex/product-strategy',
+      url: '/cortex/product-strategy',
       type: 'Template',
+      createdDate: '2023-07-05',
       source: 'Team Workshop',
       keywords: ['Product', 'Strategy', 'Management'],
-      pitch: 'Framework for product strategy'
+      pitch: 'Framework for product strategy',
+      writer: 'Emily Rodriguez'
     },
     {
       id: '5',
       title: 'JavaScript patterns',
-      link: '/cortex/js-patterns',
+      url: '/cortex/js-patterns',
       type: 'Code',
+      createdDate: '2023-08-18',
       source: 'Book',
       keywords: ['JavaScript', 'Patterns', 'Development'],
-      pitch: 'Effective JavaScript patterns and practices'
+      pitch: 'Effective JavaScript patterns and practices',
+      writer: 'Michael Park'
     }
   ];
 
   const columns = [
     { id: 'title', name: 'Title', sortable: true },
-    { id: 'link', name: 'Link', sortable: false },
+    { id: 'url', name: 'URL', sortable: false },
     { id: 'type', name: 'Type', sortable: true },
-    { id: 'source', name: 'Source', sortable: true },
+    { id: 'createdDate', name: 'Created Date', sortable: true },
     { id: 'keywords', name: 'Keywords', sortable: false },
-    { id: 'pitch', name: 'Pitch', sortable: true },
+    { id: 'source', name: 'Source', sortable: true },
+    { id: 'pitch', name: 'Pitch', sortable: false },
+    { id: 'writer', name: 'Writer', sortable: true },
   ];
 
   const renderTableView = () => (
@@ -110,14 +124,14 @@ const CortexTable = ({ viewType = 'table' }: CortexTableProps) => {
           <TableRow key={item.id} className="hover:bg-muted/30">
             <TableCell className="font-medium">{item.title}</TableCell>
             <TableCell className="text-blue-500 hover:underline">
-              <a href={item.link}>{item.link}</a>
+              <a href={item.url}>{item.url}</a>
             </TableCell>
             <TableCell>
               <span className="px-2 py-1 rounded-full bg-primary/10 text-xs font-medium">
                 {item.type}
               </span>
             </TableCell>
-            <TableCell>{item.source}</TableCell>
+            <TableCell>{item.createdDate}</TableCell>
             <TableCell>
               <div className="flex flex-wrap gap-1">
                 {item.keywords.map((keyword, idx) => (
@@ -130,7 +144,9 @@ const CortexTable = ({ viewType = 'table' }: CortexTableProps) => {
                 ))}
               </div>
             </TableCell>
+            <TableCell>{item.source}</TableCell>
             <TableCell>{item.pitch}</TableCell>
+            <TableCell>{item.writer}</TableCell>
           </TableRow>
         ))}
       </TableBody>
