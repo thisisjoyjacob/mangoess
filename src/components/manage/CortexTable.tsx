@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, Plus, ArrowUpDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -176,7 +175,7 @@ const CortexTable = ({ viewType = 'table' }: CortexTableProps) => {
                 </span>
               ))}
             </div>
-            <a href={item.link} className="text-sm text-blue-500 hover:underline">{item.link}</a>
+            <a href={item.url} className="text-sm text-blue-500 hover:underline">{item.url}</a>
           </div>
         </Card>
       ))}
@@ -208,7 +207,7 @@ const CortexTable = ({ viewType = 'table' }: CortexTableProps) => {
             </div>
           </div>
           <div className="flex items-center">
-            <a href={item.link} className="text-sm text-blue-500 hover:underline">{item.link}</a>
+            <a href={item.url} className="text-sm text-blue-500 hover:underline">{item.url}</a>
           </div>
         </div>
       ))}
