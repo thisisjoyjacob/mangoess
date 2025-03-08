@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Check, Edit2, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Toaster } from 'sonner';
 
 const ManagePage = () => {
   const showContent = useAnimateIn(false, 300);
@@ -18,6 +19,8 @@ const ManagePage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [tempTitle, setTempTitle] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('private');
+  const [selectedItem, setSelectedItem] = useState<string | null>('overview');
 
   const handleEditClick = () => {
     setTempTitle(libraryTitle);
@@ -47,6 +50,11 @@ const ManagePage = () => {
     }
   };
 
+  const handleCortexSelect = (categoryId: string, itemId: string | null) => {
+    setSelectedCategory(categoryId);
+    setSelectedItem(itemId);
+  };
+
   // Handle keyboard events for inline editing
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -58,9 +66,14 @@ const ManagePage = () => {
 
   return (
     <div className="max-w-full mx-auto h-screen pt-24 pb-6">
+      <Toaster position="top-right" />
       <AnimatedTransition show={showContent} animation="slide-up">
         <div className="flex h-[calc(100vh-130px)]">
-          <CortexSidebar />
+          <CortexSidebar 
+            onCortexSelect={handleCortexSelect}
+            selectedCategoryId={selectedCategory}
+            selectedItemId={selectedItem}
+          />
           <div className="flex-1 overflow-x-auto">
             <div className="flex items-center justify-between px-4 py-2 border-b border-border/50">
               {isEditing ? (
@@ -96,7 +109,11 @@ const ManagePage = () => {
                 <ViewSwitcher activeView={viewType} onViewChange={setViewType} />
               </TooltipProvider>
             </div>
-            <CortexTable viewType={viewType} />
+            <CortexTable 
+              viewType={viewType} 
+              categoryId={selectedCategory}
+              cortexId={selectedItem}
+            />
           </div>
         </div>
       </AnimatedTransition>

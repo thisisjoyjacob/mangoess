@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Folder, Share, Users, Lock, Plus } from 'lucide-react';
+import { Folder, Share, Users, Lock, Plus, Move } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type CortexCategory = {
@@ -15,10 +15,17 @@ type CortexItem = {
   name: string;
 };
 
-const CortexSidebar = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('shared');
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+interface CortexSidebarProps {
+  onCortexSelect: (categoryId: string, itemId: string | null) => void;
+  selectedCategoryId: string;
+  selectedItemId: string | null;
+}
 
+const CortexSidebar = ({ 
+  onCortexSelect, 
+  selectedCategoryId = 'private', 
+  selectedItemId = 'overview' 
+}: CortexSidebarProps) => {
   const categories: CortexCategory[] = [
     {
       id: 'shared',
@@ -45,12 +52,21 @@ const CortexSidebar = () => {
       name: 'Private',
       icon: <Lock size={16} className="text-amber-500" />,
       items: [
+        { id: 'overview', name: 'Overview' },
         { id: 'private-1', name: 'UXUI' },
         { id: 'private-2', name: 'Space' },
         { id: 'private-3', name: 'Cloud Computing' },
       ]
     }
   ];
+
+  const handleCategoryClick = (categoryId: string) => {
+    onCortexSelect(categoryId, null);
+  };
+
+  const handleItemClick = (categoryId: string, itemId: string) => {
+    onCortexSelect(categoryId, itemId);
+  };
 
   return (
     <div className="w-60 border-r border-border/50 overflow-y-auto shrink-0">
@@ -59,9 +75,9 @@ const CortexSidebar = () => {
           <div 
             className={cn(
               "flex items-center justify-between px-4 py-2 text-sm font-medium cursor-pointer",
-              selectedCategory === category.id ? "text-primary" : "text-foreground/80"
+              selectedCategoryId === category.id && !selectedItemId ? "text-primary" : "text-foreground/80"
             )}
-            onClick={() => setSelectedCategory(category.id)}
+            onClick={() => handleCategoryClick(category.id)}
           >
             <div className="flex items-center gap-2">
               {category.icon}
@@ -78,11 +94,11 @@ const CortexSidebar = () => {
                 key={item.id}
                 className={cn(
                   "flex items-center px-6 py-2 text-sm cursor-pointer",
-                  selectedItem === item.id 
+                  selectedCategoryId === category.id && selectedItemId === item.id
                     ? "bg-primary/10 text-primary" 
                     : "hover:bg-muted/50 text-foreground/80"
                 )}
-                onClick={() => setSelectedItem(item.id)}
+                onClick={() => handleItemClick(category.id, item.id)}
               >
                 <span>{item.name}</span>
               </div>
