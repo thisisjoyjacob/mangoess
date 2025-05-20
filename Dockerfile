@@ -1,6 +1,9 @@
 
 # Use Node.js as the base image
-FROM node:20-alpine as build
+# FROM node:20-alpine as build
+
+# Use Debian-based Node.js image instead of Alpine
+FROM node:20 as build
 
 # Set working directory
 WORKDIR /app
