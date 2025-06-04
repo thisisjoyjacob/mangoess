@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -12,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { Check, Mail, User, Link as LinkIcon } from "lucide-react"
 import { toast } from "sonner"
+import emailjs from '@emailjs/browser';
 
 interface WaitlistModalProps {
   isOpen: boolean
@@ -33,14 +33,30 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     reason: ""
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send this data to your backend
-    console.log("Submitted data:", formData)
-    toast.success("Thanks for joining our waitlist! We'll be in touch soon.", {
-      duration: 5000,
-    })
-    onClose()
+    try {
+      // Send form data via EmailJS
+      await emailjs.send(
+        'service_nvkdzxk', // replace with your EmailJS service ID
+        'template_zsgxol4', // replace with your EmailJS template ID
+        {
+          name: formData.name,
+          email: formData.email,
+          linkedin: formData.linkedin,
+          currentTool: formData.currentTool,
+          reason: formData.reason,
+        },
+        'DFAqOVoaYniRaknxG' // replace with your EmailJS public key
+      )
+      toast.success("Thanks for joining our waitlist! We'll be in touch soon.", {
+        duration: 5000,
+      })
+      onClose()
+    } catch (error) {
+      toast.error("There was an error submitting the form. Please try again.")
+      console.error("EmailJS error:", error)
+    }
   }
 
   return (
