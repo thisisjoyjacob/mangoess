@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useAnimateIn } from '@/lib/animations';
 import { HeroSection } from '@/components/landing/HeroSection';
@@ -9,6 +8,7 @@ import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
 import { CallToAction } from '@/components/landing/CallToAction';
 import { LoadingScreen } from '@/components/landing/LoadingScreen';
 import UseCasesSection from '@/components/landing/UseCasesSection';
+import AdBanner from "@/components/AdBanner";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -64,6 +64,7 @@ const Index = () => {
           <CallToAction show={showCallToAction} />
         </div>
       </div>
+      <AdBanner />
     </div>
   );
 };
